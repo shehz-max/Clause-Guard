@@ -1,0 +1,68 @@
+[
+  {
+    "category": "risky_clause",
+    "title": "Unlimited Indemnification",
+    "content": "Contractor shall indemnify, defend, and hold harmless Client, its officers, directors, employees, and agents from and against any and all claims, damages, losses, and expenses, including but not limited to attorney's fees, arising out of or resulting from the performance of the Work, regardless of whether such claim, damage, loss, or expense is caused in part by a party indemnified hereunder.",
+    "metadata": {
+      "severity": "HIGH",
+      "risk_type": "LITIGATION_EXPOSURE",
+      "recommendation": "Negotiate to limit indemnification to third-party claims arising solely from the contractor's gross negligence or willful misconduct."
+    }
+  },
+  {
+    "category": "risky_clause",
+    "title": "Unilateral Termination for Convenience",
+    "content": "Client may terminate this Agreement at any time, for any reason or no reason, upon ten (10) days' written notice to Contractor, without further obligation or penalty.",
+    "metadata": {
+      "severity": "MEDIUM",
+      "risk_type": "BUSINESS_STABILITY",
+      "recommendation": "Request a longer notice period (e.g., 30-60 days) and a termination fee to cover unrecoverable costs."
+    }
+  },
+  {
+    "category": "risky_clause",
+    "title": "Perpetual IP Assignment",
+    "content": "All intellectual property rights in and to any work product created by Contractor in the performance of the Services shall be the sole and exclusive property of the Client in perpetuity, regardless of payment status.",
+    "metadata": {
+      "severity": "HIGH",
+      "risk_type": "IP_LOSS",
+      "recommendation": "Ensure IP transfer only occurs upon full payment for the services rendered."
+    }
+  },
+  {
+    "category": "best_practice",
+    "title": "Mutual Confidentiality",
+    "content": "Each party agrees to maintain the confidentiality of the other party's proprietary information and to use such information only for the purposes of performing its obligations under this Agreement.",
+    "metadata": {
+      "category": "CONFIDENTIALITY",
+      "benefit": "Protects both parties equally and simplifies negotiations."
+    }
+  },
+  {
+    "category": "glossary",
+    "title": "Force Majeure",
+    "content": "A clause that excuses a party from performing its contractual obligations when an extraordinary event or circumstance beyond their control (e.g., war, strike, riot, crime, epidemic, or an event described by the legal term act of God) happens.",
+    "metadata": {
+      "term_type": "LEGAL_LATIN",
+      "plain_english": "Acts of God / Unforeseeable Events"
+    }
+  },
+  {
+    "category": "glossary",
+    "title": "Severability",
+    "content": "A provision that states if any part of the contract is found to be illegal or unenforceable, the remainder of the contract will still be valid and enforceable.",
+    "metadata": {
+      "term_type": "BOILERPLATE",
+      "plain_english": "Survival of the rest"
+    }
+  },
+  {
+    "category": "template",
+    "title": "Standard NDA Termination",
+    "content": "Either party may terminate this Agreement upon thirty (30) days' written notice to the other party. Upon termination, each party shall return or destroy all Confidential Information received from the disclosing party.",
+    "metadata": {
+      "agreement_type": "NDA",
+      "standard_rating": "FAIR"
+    }
+  }
+]
