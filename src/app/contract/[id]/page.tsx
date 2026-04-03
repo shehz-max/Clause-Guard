@@ -6,15 +6,17 @@ export default async function ContractDetailPage({ params }: { params: Promise<{
   const supabase = await createClient();
   const { id } = await params;
   
-  const { data: document, error } = await supabase
-    .from('documents')
+  const { data: document, error } = await (supabase
+    .from('documents') as any)
     .select(`*, analyses(*)`)
     .eq('id', id)
     .single();
+  
+  const doc = document as any;
 
-  if (error || !document) return notFound();
+  if (error || !doc) return notFound();
 
-  const analysis = document.analyses && document.analyses.length > 0 ? document.analyses[0] : null;
+  const analysis = doc.analyses && doc.analyses.length > 0 ? doc.analyses[0] : null;
 
   return (
     <div className="max-w-6xl mx-auto h-[calc(100vh-8rem)] flex flex-col">

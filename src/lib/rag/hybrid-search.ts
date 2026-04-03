@@ -38,7 +38,7 @@ export async function hybridSearchChunks(
   const supabase = await createClient();
   const queryEmbedding = await createEmbedding(query);
 
-  const { data, error } = await supabase.rpc('hybrid_search_chunks', {
+  const { data, error } = await (supabase as any).rpc('hybrid_search_chunks', {
     query_text: query,
     query_embedding: queryEmbedding,
     document_id: documentId,
@@ -68,7 +68,7 @@ export async function hybridSearchKnowledgeBase(
   const supabase = await createClient();
   const queryEmbedding = await createEmbedding(query);
 
-  const { data, error } = await supabase.rpc('hybrid_search_knowledge_base', {
+  const { data, error } = await (supabase as any).rpc('hybrid_search_knowledge_base', {
     query_text: query,
     query_embedding: queryEmbedding,
     category_filter: categoryFilter || null,

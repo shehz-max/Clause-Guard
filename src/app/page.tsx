@@ -9,8 +9,8 @@ export const dynamic = 'force-dynamic';
 export default async function DashboardPage() {
   const supabase = await createClient();
   
-  const { data: documents, error } = await supabase
-    .from('documents')
+  const { data: documents, error } = await (supabase
+    .from('documents') as any)
     .select(`
       id, filename, status, created_at,
       analyses ( overall_risk_score, risk_level )

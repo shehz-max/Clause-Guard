@@ -8,16 +8,16 @@ export default async function SettingsPage() {
   const supabase = await createClient();
 
   // Get knowledge base stats
-  const { count: kbCount } = await supabase
-    .from('knowledge_base')
+  const { count: kbCount } = await (supabase
+    .from('knowledge_base') as any)
     .select('*', { count: 'exact', head: true });
 
-  const { count: docCount } = await supabase
-    .from('documents')
+  const { count: docCount } = await (supabase
+    .from('documents') as any)
     .select('*', { count: 'exact', head: true });
 
-  const { count: analysisCount } = await supabase
-    .from('analyses')
+  const { count: analysisCount } = await (supabase
+    .from('analyses') as any)
     .select('*', { count: 'exact', head: true });
 
   const stats = [
