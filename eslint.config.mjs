@@ -19,6 +19,7 @@ const eslintConfig = [
       "@typescript-eslint/no-empty-object-type": "off",
       "@typescript-eslint/no-unsafe-function-type": "off",
       "prefer-const": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
     },
   },
 ];

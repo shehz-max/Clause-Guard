@@ -27,13 +27,13 @@ export async function parsePDF(buffer: Buffer): Promise<ParsedPDF> {
             let text = ''
             
             for (const item of textContent.items) {
-              // @ts-ignore - pdf-parse types are incomplete
+              // @ts-expect-error - pdf-parse types are incomplete
               if (lastY !== item.transform[5] && lastY !== null) {
                 text += '\n'
               }
-              // @ts-ignore
+              // @ts-expect-error
               text += item.str
-              // @ts-ignore
+              // @ts-expect-error
               lastY = item.transform[5]
             }
             
