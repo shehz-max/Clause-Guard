@@ -36,7 +36,7 @@ export function ChatInterface({ documentId }: { documentId: string }) {
         {messages.length === 0 ? (
            <div className="h-full flex flex-col items-center justify-center text-muted-foreground opacity-70">
               <Bot className="w-12 h-12 mb-4 drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] text-primary/80" />
-              <p>I've read the contract. What would you like to know?</p>
+              <p>I&apos;ve read the contract. What would you like to know?</p>
               <div className="mt-8 flex flex-wrap justify-center gap-2 max-w-lg">
                  <button onClick={() => handleInputChange({ target: { value: "What are the termination conditions?" } } as any)} className="px-4 py-2 bg-muted rounded-full text-xs hover:bg-muted/80 hover:text-foreground transition-colors border border-border/50">Terminations?</button>
                  <button onClick={() => handleInputChange({ target: { value: "Is there an exclusivity clause?" } } as any)} className="px-4 py-2 bg-muted rounded-full text-xs hover:bg-muted/80 hover:text-foreground transition-colors border border-border/50">Exclusivity?</button>

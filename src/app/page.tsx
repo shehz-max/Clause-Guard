@@ -59,7 +59,7 @@ export default async function DashboardPage() {
             <FileText className="w-10 h-10 text-muted-foreground opacity-60" />
           </div>
           <h3 className="text-xl font-semibold mb-2 text-foreground">No contracts found</h3>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">You haven't uploaded any legal documents yet. Upload your first contract to get started with the ClauseGuard engine.</p>
+          <p className="text-muted-foreground mb-8 max-w-md mx-auto">You haven&apos;t uploaded any legal documents yet. Upload your first contract to get started with the ClauseGuard engine.</p>
           <Link 
             href="/upload" 
             className="bg-secondary text-secondary-foreground font-medium px-6 py-3 rounded-full inline-flex items-center hover:bg-secondary/80 transition-colors shadow-sm"

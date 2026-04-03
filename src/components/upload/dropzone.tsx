@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { UploadCloud, FileType, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { UploadCloud, FileType, CheckCircle, AlertCircle, Loader2, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export function FileDropzone() {
