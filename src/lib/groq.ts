@@ -29,3 +29,9 @@ export const GROQ_RATE_LIMITS = {
   requestsPerDay: 14400,
   tokensPerMinute: 6000,
 }
+
+// Gemini Free Tier Rate Limits (approximate for RAG safety)
+export const GEMINI_RATE_LIMITS = {
+  requestsPerMinute: 15,
+  requestsPerDay: 1500,
+}
