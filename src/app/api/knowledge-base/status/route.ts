@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { Database } from '@/lib/supabase/types';
 import * as fs from 'fs';
 import * as path from 'path';
 import { GoogleGenerativeAI } from '@google/generative-ai';
@@ -12,26 +13,26 @@ export async function GET() {
     return NextResponse.json({ success: false, error: 'Missing Supabase credentials in environment' }, { status: 500 });
   }
 
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabase = createClient<Database>(supabaseUrl, supabaseKey);
 
   try {
-    const { count: risky_clause_count, error: error1 } = await supabase
-      .from('knowledge_base')
+    const { count: risky_clause_count, error: error1 } = await (supabase
+      .from('knowledge_base') as any)
       .select('*', { count: 'exact', head: true })
       .eq('category', 'risky_clause');
       
-    const { count: best_practice_count, error: error2 } = await supabase
-      .from('knowledge_base')
+    const { count: best_practice_count, error: error2 } = await (supabase
+      .from('knowledge_base') as any)
       .select('*', { count: 'exact', head: true })
       .eq('category', 'best_practice');
 
-    const { count: glossary_count, error: error3 } = await supabase
-      .from('knowledge_base')
+    const { count: glossary_count, error: error3 } = await (supabase
+      .from('knowledge_base') as any)
       .select('*', { count: 'exact', head: true })
       .eq('category', 'glossary');
 
-    const { count: template_count, error: error4 } = await supabase
-      .from('knowledge_base')
+    const { count: template_count, error: error4 } = await (supabase
+      .from('knowledge_base') as any)
       .select('*', { count: 'exact', head: true })
       .eq('category', 'template');
       
@@ -64,7 +65,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Missing GOOGLE_API_KEY credentials in environment' }, { status: 500 });
   }
 
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabase = createClient<Database>(supabaseUrl, supabaseKey);
   const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
   const model = genAI.getGenerativeModel({ model: 'text-embedding-004' });
 
@@ -97,8 +98,8 @@ export async function POST(req: Request) {
         try {
             const embedding = await embedText(item.content);
             
-            const { error } = await supabase.from('knowledge_base').insert({
-              category: item.category,
+            const { error } = await (supabase.from('knowledge_base') as any).insert({
+              category: item.category as 'risky_clause' | 'best_practice' | 'glossary' | 'template',
               title: item.title,
               content: item.content,
               metadata: item.metadata,
@@ -120,7 +121,7 @@ export async function POST(req: Request) {
     }
 
     messages.push('Clearing existing knowledge base...');
-    const { error: deleteError } = await supabase.from('knowledge_base').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+    const { error: deleteError } = await (supabase.from('knowledge_base') as any).delete().neq('id', '00000000-0000-0000-0000-000000000000');
     
     if (deleteError) {
         throw new Error(`Failed to clear existing knowledge base: ${deleteError.message}`);

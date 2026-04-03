@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
     // Create document record
     const documentId = uuidv4()
-    const { error: docError } = await supabase.from('documents').insert({
+    const { error: docError } = await (supabase.from('documents') as any).insert({
       id: documentId,
       filename: file.name,
       file_type: extension === 'pdf' ? 'pdf' : 'docx',
@@ -107,13 +107,13 @@ export async function POST(request: NextRequest) {
       embedding: embeddings[index],
     }))
 
-    const { error: chunksError } = await supabase.from('chunks').insert(chunkRecords)
+    const { error: chunksError } = await (supabase.from('chunks') as any).insert(chunkRecords)
 
     if (chunksError) {
       console.error('Error inserting chunks:', chunksError)
       // Update document status to error
-      await supabase
-        .from('documents')
+      await (supabase
+        .from('documents') as any)
         .update({ status: 'error', error_message: 'Failed to process chunks' })
         .eq('id', documentId)
       

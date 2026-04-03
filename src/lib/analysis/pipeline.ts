@@ -9,10 +9,10 @@ export async function runAnalysisPipeline(documentId: string) {
   const supabase = await createClient();
 
   try {
-    const { data: doc, error: docErr } = await supabase.from('documents').select('*').eq('id', documentId).single();
+    const { data: doc, error: docErr } = await (supabase.from('documents') as any).select('*').eq('id', documentId).single();
     if (docErr || !doc) throw new Error('Document not found');
 
-    const { data: chunks, error: chunkErr } = await supabase.from('chunks').select('*').eq('document_id', documentId).order('chunk_index');
+    const { data: chunks, error: chunkErr } = await (supabase.from('chunks') as any).select('*').eq('document_id', documentId).order('chunk_index');
     if (chunkErr || !chunks || chunks.length === 0) throw new Error('Document chunks not found');
 
     const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -30,7 +30,7 @@ export async function runAnalysisPipeline(documentId: string) {
     
     const { score, risk_level } = calculateRiskScore(risks);
 
-    const { data: analysis, error: insertErr } = await supabase.from('analyses').insert({
+    const { data: analysis, error: insertErr } = await (supabase.from('analyses') as any).insert({
       document_id: documentId,
       summary,
       overall_risk_score: score,
@@ -43,12 +43,12 @@ export async function runAnalysisPipeline(documentId: string) {
 
     if (insertErr) throw new Error(`Failed to save analysis: ${insertErr.message}`);
 
-    await supabase.from('documents').update({ status: 'analyzed' }).eq('id', documentId);
+    await (supabase.from('documents') as any).update({ status: 'analyzed' }).eq('id', documentId);
 
     return analysis;
   } catch (error: any) {
     console.error('Final Pipeline Error:', error);
-    await supabase.from('documents').update({ status: 'failed' }).eq('id', documentId);
+    await (supabase.from('documents') as any).update({ status: 'error' }).eq('id', documentId);
     throw error;
   }
 }
