@@ -1,0 +1,52 @@
+[
+  {
+    "category": "risky_clause",
+    "title": "Unlimited Indemnification",
+    "content": "Contractor shall indemnify, defend, and hold harmless Client, its officers, directors, employees, and agents from and against any and all claims, damages, losses, and expenses, including but not limited to attorney's fees, arising out of or resulting from the performance of the Work, regardless of whether such claim, damage, loss, or expense is caused in part by a party indemnified hereunder.",
+    "metadata": {
+      "severity": "HIGH",
+      "risk_type": "LITIGATION_EXPOSURE",
+      "recommendation": "Negotiate to limit indemnification to third-party claims arising solely from the contractor's gross negligence or willful misconduct."
+    }
+  },
+  {
+    "category": "risky_clause",
+    "title": "Unilateral Termination for Convenience",
+    "content": "Client may terminate this Agreement at any time, for any reason or no reason, upon ten (10) days' written notice to Contractor, without further obligation or penalty.",
+    "metadata": {
+      "severity": "MEDIUM",
+      "risk_type": "BUSINESS_STABILITY",
+      "recommendation": "Request a longer notice period (e.g., 30-60 days) and a termination fee to cover unrecoverable costs."
+    }
+  },
+  {
+    "category": "risky_clause",
+    "title": "Perpetual IP Assignment",
+    "content": "All intellectual property rights in and to any work product created by Contractor in the performance of the Services shall be the sole and exclusive property of the Client in perpetuity, regardless of payment status.",
+    "metadata": {
+      "severity": "HIGH",
+      "risk_type": "IP_LOSS",
+      "recommendation": "Ensure IP transfer only occurs upon full payment for the services rendered."
+    }
+  },
+  {
+    "category": "risky_clause",
+    "title": "Uncapped Liability",
+    "content": "In no event shall either party's liability arising out of or related to this agreement exceed the total amount paid by the client under this agreement. However, this limitation shall not apply to breaches of confidentiality or indemnification obligations.",
+    "metadata": {
+      "severity": "HIGH",
+      "risk_type": "FINANCIAL_RISK",
+      "recommendation": "Try to cap liability at a fixed multiple of fees paid (e.g., 1x or 2x) or to the limits of your insurance policy, without broad exceptions."
+    }
+  },
+  {
+    "category": "risky_clause",
+    "title": "Automatic Renewal without Notice",
+    "content": "This Agreement shall automatically renew for successive one (1) year terms unless either party provides written notice of its intent not to renew at least ninety (90) days prior to the expiration of the then-current term.",
+    "metadata": {
+      "severity": "MEDIUM",
+      "risk_type": "VENDOR_LOCK_IN",
+      "recommendation": "Reduce the notice period to 30 days or require affirmative consent (opt-in) for renewal instead of automatic renewal."
+    }
+  }
+]

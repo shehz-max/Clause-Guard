@@ -1,0 +1,47 @@
+[
+  {
+    "category": "glossary",
+    "title": "Force Majeure",
+    "content": "A clause that excuses a party from performing its contractual obligations when an extraordinary event or circumstance beyond their control (e.g., war, strike, riot, crime, epidemic, or an event described by the legal term act of God) happens.",
+    "metadata": {
+      "term_type": "LEGAL_LATIN",
+      "plain_english": "Acts of God / Unforeseeable Events"
+    }
+  },
+  {
+    "category": "glossary",
+    "title": "Severability",
+    "content": "A provision that states if any part of the contract is found to be illegal or unenforceable, the remainder of the contract will still be valid and enforceable.",
+    "metadata": {
+      "term_type": "BOILERPLATE",
+      "plain_english": "Survival of the rest of the contract"
+    }
+  },
+  {
+    "category": "glossary",
+    "title": "Indemnification",
+    "content": "A contractual obligation of one party to compensate the loss incurred to the other party due to the acts of the indemnitor or any other party.",
+    "metadata": {
+      "term_type": "RISK_ALLOCATION",
+      "plain_english": "Promise to pay for someone else's legal losses/lawsuits"
+    }
+  },
+  {
+    "category": "glossary",
+    "title": "Non-waiver",
+    "content": "A clause establishing that a party's failure to enforce a provision of the contract does not constitute a waiver of their right to enforce that provision or any other provision in the future.",
+    "metadata": {
+      "term_type": "BOILERPLATE",
+      "plain_english": "Delay in enforcing rights does not mean losing them"
+    }
+  },
+  {
+    "category": "glossary",
+    "title": "Integration Clause / Entire Agreement",
+    "content": "A clause stating that the current written contract is the final and complete agreement between the parties, superseding any prior oral or written negotiations.",
+    "metadata": {
+      "term_type": "BOILERPLATE",
+      "plain_english": "What you see is what you get; past promises don't count"
+    }
+  }
+]

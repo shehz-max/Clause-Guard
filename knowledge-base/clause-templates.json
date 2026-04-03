@@ -1,0 +1,47 @@
+[
+  {
+    "category": "template",
+    "title": "Standard NDA Termination",
+    "content": "Either party may terminate this Agreement upon thirty (30) days' written notice to the other party. Upon termination, each party shall return or destroy all Confidential Information received from the disclosing party.",
+    "metadata": {
+      "agreement_type": "NDA",
+      "standard_rating": "FAIR"
+    }
+  },
+  {
+    "category": "template",
+    "title": "Independent Contractor Status",
+    "content": "Contractor is an independent contractor, and neither Contractor nor Contractor's employees or contract personnel are, or shall be deemed, Client's employees. Contractor shall be responsible for all taxes, withholding, and other statutory obligations.",
+    "metadata": {
+      "agreement_type": "SERVICE_AGREEMENT",
+      "standard_rating": "STANDARD"
+    }
+  },
+  {
+    "category": "template",
+    "title": "Governing Law and Jurisdiction",
+    "content": "This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to its conflict of law principles. Any legal action shall be brought exclusively in the courts located in Delaware.",
+    "metadata": {
+      "agreement_type": "BOILERPLATE",
+      "standard_rating": "JURISDICTION_SPECIFIC"
+    }
+  },
+  {
+    "category": "template",
+    "title": "Mutual Non-Disparagement",
+    "content": "During the term of this Agreement and thereafter, neither Party shall make any public or private statements that are derogatory, disparaging, or defamatory regarding the other Party, its products, services, or employees.",
+    "metadata": {
+      "agreement_type": "SETTLEMENT_SEVERANCE",
+      "standard_rating": "FAIR"
+    }
+  },
+  {
+    "category": "template",
+    "title": "Publicity Rights",
+    "content": "Client agrees that Contractor may use Client's name and logo on Contractor's website and marketing materials solely for the purpose of identifying Client as a customer of Contractor. Any other use requires prior written consent.",
+    "metadata": {
+      "agreement_type": "SERVICE_AGREEMENT",
+      "standard_rating": "BALANCED"
+    }
+  }
+]

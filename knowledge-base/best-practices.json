@@ -1,0 +1,47 @@
+[
+  {
+    "category": "best_practice",
+    "title": "Mutual Confidentiality",
+    "content": "Each party agrees to maintain the confidentiality of the other party's proprietary information and to use such information only for the purposes of performing its obligations under this Agreement.",
+    "metadata": {
+      "category": "CONFIDENTIALITY",
+      "benefit": "Protects both parties equally and simplifies negotiations."
+    }
+  },
+  {
+    "category": "best_practice",
+    "title": "Clearly Defined Scope of Work",
+    "content": "The Services to be provided under this Agreement shall be strictly limited to those described in Exhibit A attached hereto. Any additional services must be agreed upon in writing by both parties in a separate Statement of Work.",
+    "metadata": {
+      "category": "SCOPE",
+      "benefit": "Prevents scope creep and ensures both parties agree on exact deliverables."
+    }
+  },
+  {
+    "category": "best_practice",
+    "title": "Reasonable Payment Terms",
+    "content": "Client shall pay all undisputed invoices within thirty (30) days of receipt. Late payments shall accrue interest at a rate of 1.5% per month or the maximum rate permitted by law.",
+    "metadata": {
+      "category": "PAYMENT",
+      "benefit": "Ensures timely cash flow and disincentivizes late payments."
+    }
+  },
+  {
+    "category": "best_practice",
+    "title": "Proportional Liability Cap",
+    "content": "Except for liability arising from gross negligence or willful misconduct, each party's aggregate liability under this Agreement shall not exceed the total fees paid or payable by Client in the twelve (12) months preceding the claim.",
+    "metadata": {
+      "category": "LIABILITY",
+      "benefit": "Limits financial exposure to a reasonable amount tied to the contract value."
+    }
+  },
+  {
+    "category": "best_practice",
+    "title": "Cure Period for Breach",
+    "content": "If a party materially breaches this Agreement, the non-breaching party must provide written notice detailing the breach. The breaching party shall have thirty (30) days to cure such breach before termination may occur.",
+    "metadata": {
+      "category": "TERMINATION",
+      "benefit": "Provides an opportunity to fix mistakes before sudden termination of the contract."
+    }
+  }
+]
