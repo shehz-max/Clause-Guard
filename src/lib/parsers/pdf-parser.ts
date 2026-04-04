@@ -20,20 +20,17 @@ export async function parsePDF(buffer: Buffer): Promise<ParsedPDF> {
   try {
     const data = await pdfParse(buffer, {
       // Extract text from each page separately
-      pagerender: function(pageData) {
+      pagerender: function(pageData: any) {
         return pageData.getTextContent()
-          .then(function(textContent) {
+          .then(function(textContent: any) {
             let lastY = null
             let text = ''
             
             for (const item of textContent.items) {
-              // @ts-expect-error - pdf-parse types are incomplete
               if (lastY !== item.transform[5] && lastY !== null) {
                 text += '\n'
               }
-              // @ts-expect-error
               text += item.str
-              // @ts-expect-error
               lastY = item.transform[5]
             }
             
