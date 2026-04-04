@@ -22,8 +22,8 @@ export default async function ContractDetailPage({ params }: { params: Promise<{
     <div className="max-w-6xl mx-auto h-[calc(100vh-8rem)] flex flex-col">
       <div className="mb-6 flex items-start justify-between shrink-0">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-foreground truncate max-w-2xl">{document.filename}</h1>
-          <p suppressHydrationWarning className="text-muted-foreground mt-1">Uploaded {new Date(document.created_at).toLocaleDateString()}</p>
+          <h1 className="text-3xl font-bold tracking-tight text-foreground truncate max-w-2xl">{doc.filename}</h1>
+          <p suppressHydrationWarning className="text-muted-foreground mt-1">Uploaded {new Date(doc.created_at).toLocaleDateString()}</p>
         </div>
         {analysis ? (
            <div className="flex flex-col items-end gap-3">
@@ -33,7 +33,7 @@ export default async function ContractDetailPage({ params }: { params: Promise<{
                   {analysis.overall_risk_score.toFixed(0)} <span className="text-xl text-muted-foreground opacity-50 font-normal">/ 100</span>
                 </div>
               </div>
-              <ExportButton document={document} analysis={analysis} />
+              <ExportButton document={doc} analysis={analysis} />
            </div>
         ) : (
            <div className="flex flex-col items-end">
@@ -43,7 +43,7 @@ export default async function ContractDetailPage({ params }: { params: Promise<{
         )}
       </div>
       
-      <ContractTabs document={document} analysis={analysis} />
+      <ContractTabs document={doc} analysis={analysis} />
     </div>
   );
 }
