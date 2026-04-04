@@ -6,13 +6,13 @@ export default async function ContractDetailPage({ params }: { params: Promise<{
   const supabase = await createClient();
   const { id } = await params;
   
-  const { data: document, error } = await (supabase
+  const { data: documentData, error } = await (supabase
     .from('documents') as any)
     .select(`*, analyses(*)`)
     .eq('id', id)
     .single();
   
-  const doc = document as any;
+  const doc = (documentData as any);
 
   if (error || !doc) return notFound();
 

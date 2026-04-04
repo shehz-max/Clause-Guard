@@ -9,11 +9,13 @@ export async function runAnalysisPipeline(documentId: string) {
   const supabase = await createClient();
 
   try {
-    const { data: doc, error: docErr } = await (supabase.from('documents') as any).select('*').eq('id', documentId).single();
+    const { data: documentData, error: docErr } = await (supabase.from('documents') as any).select('*').eq('id', documentId).single();
+    const doc = (documentData as any);
     if (docErr || !doc) throw new Error('Document not found');
 
-    const { data: chunks, error: chunkErr } = await (supabase.from('chunks') as any).select('*').eq('document_id', documentId).order('chunk_index');
-    if (chunkErr || !chunks || chunks.length === 0) throw new Error('Document chunks not found');
+    const { data: chunksData, error: chunkErr } = await (supabase.from('chunks') as any).select('*').eq('document_id', documentId).order('chunk_index');
+    const chunks = (chunksData as any[]) || [];
+    if (chunkErr || chunks.length === 0) throw new Error('Document chunks not found');
 
     const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 

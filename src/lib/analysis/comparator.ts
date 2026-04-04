@@ -11,9 +11,10 @@ export interface BestPracticeComparison {
 
 export async function compareWithBestPractices(chunks: any[]): Promise<BestPracticeComparison[]> {
   const supabase = await createClient();
-  const { data: bps } = await supabase.from('knowledge_base').select('title, content').eq('category', 'best_practice').limit(5);
+  const { data: bpsData } = await (supabase.from('knowledge_base') as any).select('title, content').eq('category', 'best_practice').limit(5);
+  const bps = (bpsData as any[]) || [];
   
-  if (!bps || bps.length === 0) return [];
+  if (bps.length === 0) return [];
 
   const prompt = `Compare the following contract to these 5 best practices. 
 Respond purely with a JSON array using exact lowercase keys: "topic", "contract_stance", "best_practice", "alignment" ("aligned", "deviant", "missing").
