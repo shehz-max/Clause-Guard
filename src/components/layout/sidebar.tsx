@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Scale, FileText, UploadCloud, Hexagon, Settings } from "lucide-react";
+import { Hexagon, UploadCloud, Settings } from "lucide-react";
+import { LogoText } from "@/components/ui/logo";
 
 const links = [
-  { name: "Dashboard", href: "/", icon: Hexagon },
+  { name: "Dashboard", href: "/dashboard", icon: Hexagon },
   { name: "Analyze", href: "/upload", icon: UploadCloud },
 ];
 
@@ -15,18 +16,8 @@ export function Sidebar() {
 
   return (
     <div className="w-64 h-full border-r border-border/30 bg-background/50 backdrop-blur-2xl flex-col hidden md:flex shrink-0">
-      <div className="h-20 flex items-center px-6 border-b border-border/30 relative overflow-hidden">
-        {/* Subtle glow behind logo */}
-        <div className="absolute top-1/2 left-4 w-12 h-12 bg-primary/20 rounded-full blur-xl -translate-y-1/2 pointer-events-none" />
-        
-        <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 mr-3 text-primary shadow-inner">
-          <svg className="w-4 h-4 fill-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-        </div>
-        <span className="font-heading font-bold text-lg tracking-tight text-foreground">
-          ClauseGuard
-        </span>
+      <div className="h-20 flex items-center px-6 border-b border-border/30 relative">
+        <LogoText />
       </div>
 
       <nav className="flex-1 p-4 space-y-1">

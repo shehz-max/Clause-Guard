@@ -36,10 +36,10 @@ export default async function ContractDetailPage({ params }: { params: Promise<{
               <ExportButton document={doc} analysis={analysis} />
            </div>
         ) : (
-           <div className="flex flex-col items-end">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground mb-1 font-semibold">Status</span>
-              <div className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 font-medium">Processing...</div>
-           </div>
+            <div className="flex flex-col items-end">
+               <span className="text-xs uppercase tracking-wider text-muted-foreground mb-1 font-semibold">Status</span>
+               <div className="px-3 py-1 rounded-full bg-primary/20 text-primary font-bold animate-pulse">Processing...</div>
+            </div>
         )}
       </div>
       

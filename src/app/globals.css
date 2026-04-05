@@ -33,53 +33,53 @@
 }
 
 :root {
-  --background: oklch(0.98 0.0 0);
-  --foreground: oklch(0.14 0.02 240);
+  --background: oklch(0.99 0.01 200); /* Very light professional grey-blue */
+  --foreground: oklch(0.12 0.03 240);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.14 0.02 240);
-  --primary: oklch(0.45 0.16 260); /* Cobalt Indigo */
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.96 0.01 240);
-  --secondary-foreground: oklch(0.20 0.02 240);
-  --muted: oklch(0.96 0.01 240);
-  --muted-foreground: oklch(0.55 0.02 240);
-  --accent: oklch(0.96 0.01 240);
-  --accent-foreground: oklch(0.20 0.02 240);
-  --destructive: oklch(0.55 0.18 20);
-  --border: oklch(0.92 0.01 240);
-  --input: oklch(0.92 0.01 240);
-  --ring: oklch(0.45 0.16 260);
-  --radius: 0.6rem;
+  --card-foreground: oklch(0.12 0.03 240);
+  --primary: oklch(0.68 0.16 160); /* Professional Success Emerald */
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.94 0.02 200);
+  --secondary-foreground: oklch(0.18 0.03 240);
+  --muted: oklch(0.94 0.02 200);
+  --muted-foreground: oklch(0.48 0.04 240);
+  --accent: oklch(0.94 0.02 200);
+  --accent-foreground: oklch(0.18 0.03 240);
+  --destructive: oklch(0.52 0.18 20);
+  --border: oklch(0.90 0.02 200);
+  --input: oklch(0.90 0.02 200);
+  --ring: oklch(0.68 0.16 160);
+  --radius: 0.75rem;
 }
 
 .dark {
-  /* Extremely deep Slate/Zinc for true professional contrast */
-  --background: oklch(0.14 0.01 245); 
+  /* Rich, deep navy-slate background for that premium dashboard look */
+  --background: oklch(0.11 0.02 245); 
   --foreground: oklch(0.98 0.01 245);
   
-  /* Slightly elevated card surfaces */
-  --card: oklch(0.17 0.01 245);
+  /* Slightly elevated card surfaces with subtle navy tint */
+  --card: oklch(0.14 0.03 245);
   --card-foreground: oklch(0.98 0.01 245);
   
-  /* Rich Cobalt Indigo Action Color */
-  --primary: oklch(0.58 0.18 255);
-  --primary-foreground: oklch(0.98 0.01 245);
+  /* High-visibility Success Emerald */
+  --primary: oklch(0.72 0.18 165);
+  --primary-foreground: oklch(0.11 0.02 245);
   
-  --secondary: oklch(0.22 0.02 245);
+  --secondary: oklch(0.18 0.04 245);
   --secondary-foreground: oklch(0.98 0.01 245);
   
-  --muted: oklch(0.20 0.01 245);
-  --muted-foreground: oklch(0.70 0.02 245);
+  --muted: oklch(0.16 0.03 245);
+  --muted-foreground: oklch(0.65 0.04 245);
   
-  --accent: oklch(0.24 0.03 250);
+  --accent: oklch(0.19 0.05 250);
   --accent-foreground: oklch(0.98 0.01 245);
   
-  --destructive: oklch(0.60 0.18 20);
+  --destructive: oklch(0.55 0.20 25);
   
-  /* Sub-pixel accurate subtle borders */
-  --border: oklch(0.23 0.01 245);
-  --input: oklch(0.23 0.01 245);
-  --ring: oklch(0.58 0.18 255);
+  /* Ultra-subtle borders for clean layout */
+  --border: oklch(0.18 0.04 245);
+  --input: oklch(0.18 0.04 245);
+  --ring: oklch(0.72 0.18 165);
 }
 
 @layer base {

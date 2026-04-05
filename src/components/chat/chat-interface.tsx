@@ -35,7 +35,7 @@ export function ChatInterface({ documentId }: { documentId: string }) {
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6">
         {messages.length === 0 ? (
            <div className="h-full flex flex-col items-center justify-center text-muted-foreground opacity-70">
-              <Bot className="w-12 h-12 mb-4 drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] text-primary/80" />
+              <Bot className="w-12 h-12 mb-4 drop-shadow-[0_0_15px_rgba(16,185,129,0.3)] text-primary/80" />
               <p>I&apos;ve read the contract. What would you like to know?</p>
               <div className="mt-8 flex flex-wrap justify-center gap-2 max-w-lg">
                  <button onClick={() => handleInputChange({ target: { value: "What are the termination conditions?" } } as any)} className="px-4 py-2 bg-muted rounded-full text-xs hover:bg-muted/80 hover:text-foreground transition-colors border border-border/50">Terminations?</button>

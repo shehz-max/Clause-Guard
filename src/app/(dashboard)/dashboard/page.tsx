@@ -3,7 +3,6 @@ import { ContractCard, Contract } from "@/components/dashboard/contract-card";
 import Link from "next/link";
 import { Plus, FileText } from "lucide-react";
 
-// Server action style cache busting or just dynamic config
 export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {

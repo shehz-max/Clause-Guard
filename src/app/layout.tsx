@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import { Sidebar } from "@/components/layout/sidebar";
-import { Header } from "@/components/layout/header";
 
 const fontSans = Inter({
   variable: "--font-sans",
@@ -15,8 +13,34 @@ const fontHeading = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "ClauseGuard by Muhammad Umer",
-  description: "AI Legal Contract Analyzer",
+  title: {
+    default: "ClauseGuard | AI-Powered Legal Contract Analysis",
+    template: "%s | ClauseGuard"
+  },
+  description: "Secure your business with ClauseGuard. Our AI-driven engine analyzes contracts for risks, benchmarks against industry standards, and provides instant legal insights.",
+  keywords: ["legal technology", "AI contract analysis", "legal risk assessment", "smart contract review", "legaltech saas"],
+  authors: [{ name: "Muhammad Umer" }],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://clauseguard.ai",
+    siteName: "ClauseGuard",
+    title: "ClauseGuard | AI-Powered Legal Contract Analysis",
+    description: "Instant, intelligent legal analysis for the modern enterprise. Shield your agreements with AI.",
+    images: [{
+      url: "/og-image.png",
+      width: 1200,
+      height: 630,
+      alt: "ClauseGuard - Legal AI Protection"
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ClauseGuard | AI-Powered Legal Contract Analysis",
+    description: "Instant, intelligent legal analysis for the modern enterprise. Shield your agreements with AI.",
+    creator: "@muhammadumer",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -31,17 +55,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body 
-        className="min-h-full flex bg-background text-foreground selection:bg-primary/20 overflow-hidden"
+        className="min-h-full bg-background text-foreground selection:bg-primary/20 transition-colors duration-300"
         suppressHydrationWarning
       >
-        <Sidebar />
-        <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
-          <div className="absolute inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background" />
-          <Header />
-          <main className="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth z-0">
-            {children}
-          </main>
-        </div>
+        {children}
       </body>
     </html>
   );

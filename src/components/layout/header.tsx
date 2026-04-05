@@ -17,7 +17,7 @@ export function Header() {
       <div className="flex items-center gap-5">
         <button className="relative p-2 text-muted-foreground/70 hover:text-foreground transition-all rounded-xl hover:bg-white/5 ring-1 ring-inset ring-transparent hover:ring-white/5">
           <Bell className="w-4.5 h-4.5" strokeWidth={2} />
-          <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_rgba(var(--primary),0.6)]" />
+          <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_12px_rgba(16,185,129,0.6)]" />
         </button>
         
         <div className="h-4 w-px bg-border/40 mx-1" />

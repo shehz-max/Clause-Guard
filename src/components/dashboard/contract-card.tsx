@@ -28,28 +28,28 @@ export function ContractCard({ contract }: { contract: Contract }) {
   return (
     <motion.div 
       layout
-      initial={{ opacity: 0, y: 15 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5 }}
-      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-      className="group relative h-full flex flex-col overflow-hidden rounded-3xl bg-card border border-border/30 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] transition-all hover:bg-card/80 hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30"
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      className="group relative h-full flex flex-col overflow-hidden rounded-3xl bg-card border border-border/40 shadow-xl transition-all hover:bg-card/90 hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-500/30"
     >
       <Link href={contract.status === 'analyzed' ? `/contract/${contract.id}` : '#'} className="flex flex-col h-full p-6 relative z-10">
         
         {/* Animated Background Mesh */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-transparent transition-all duration-500 pointer-events-none -z-10" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/0 to-emerald-500/0 group-hover:from-emerald-500/5 group-hover:to-transparent transition-all duration-700 pointer-events-none -z-10" />
 
         <div className="flex justify-between items-start mb-6">
-          <div className="p-3 bg-muted/50 rounded-2xl group-hover:bg-primary/10 group-hover:text-primary transition-colors text-muted-foreground ring-1 ring-inset ring-white/5 shadow-inner shadow-black/20">
+          <div className="p-3 bg-muted/50 rounded-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 text-muted-foreground ring-1 ring-inset ring-white/5 shadow-inner">
             <FileText className="w-5 h-5" strokeWidth={2} />
           </div>
           
           {isAnalyzed && analysis ? (
-            <div className={`px-3 py-1.5 text-xs font-semibold rounded-full flex items-center border shadow-sm backdrop-blur-md ${
+            <div className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-full flex items-center border shadow-sm backdrop-blur-md ${
               isHighRisk ? 'bg-destructive/10 text-destructive border-destructive/20' : 
               isMedRisk ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20' : 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
             }`}>
-              <div className={`w-1.5 h-1.5 rounded-full mr-2 ${isHighRisk ? 'bg-destructive' : isMedRisk ? 'bg-yellow-500' : 'bg-emerald-500'}`} />
+              <div className={`w-2 h-2 rounded-full mr-2 ${isHighRisk ? 'bg-destructive animate-pulse' : isMedRisk ? 'bg-yellow-500' : 'bg-emerald-500'}`} />
               Score: {score.toFixed(0)}
             </div>
           ) : contract.status === 'failed' ? (
