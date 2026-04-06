@@ -26,7 +26,14 @@ export const GEMINI_RATE_LIMITS = {
 // Generate embeddings for text
 export async function generateEmbedding(text: string): Promise<number[]> {
   const result = await embeddingModel.embedContent(text)
-  return result.embedding.values
+  const embedding = result.embedding.values
+  
+  // Truncate to match Supabase pgvector constraint (Matryoshka learning down-projection)
+  if (embedding.length > EMBEDDING_DIMENSION) {
+    return embedding.slice(0, EMBEDDING_DIMENSION)
+  }
+  
+  return embedding
 }
 
 // Generate embeddings for multiple texts (batch)
