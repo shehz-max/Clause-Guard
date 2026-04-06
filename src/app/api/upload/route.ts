@@ -114,11 +114,11 @@ export async function POST(request: NextRequest) {
       // Update document status to error
       await (supabase
         .from('documents') as any)
-        .update({ status: 'error', error_message: 'Failed to process chunks' })
+        .update({ status: 'error', error_message: 'Failed to process chunks: ' + (chunksError.message || JSON.stringify(chunksError)) })
         .eq('id', documentId)
       
       return NextResponse.json(
-        { error: 'Failed to process document chunks' },
+        { error: 'Failed to process document chunks: ' + chunksError.message, details: chunksError },
         { status: 500 }
       )
     }
