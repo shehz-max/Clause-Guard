@@ -94,6 +94,13 @@ export async function POST(request: NextRequest) {
     const chunkContents = chunks.map(c => c.content)
     const embeddings = await createEmbeddings(chunkContents)
 
+    // FORCE truncation down to 768 dims right before insertion to bypass strict Webpack lib caching
+    for (let i = 0; i < embeddings.length; i++) {
+      if (embeddings[i] && embeddings[i].length > 768) {
+        embeddings[i] = embeddings[i].slice(0, 768);
+      }
+    }
+
     // Insert chunks with embeddings
     const chunkRecords = chunks.map((chunk, index) => ({
       document_id: documentId,
