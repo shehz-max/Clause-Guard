@@ -4,7 +4,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!)
 
 // Gemini model for embeddings
 export const embeddingModel = genAI.getGenerativeModel({
-  model: 'embedding-001',
+  model: 'gemini-embedding-001',
 })
 
 // Gemini model for text generation (backup option)
