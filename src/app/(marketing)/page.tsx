@@ -283,13 +283,13 @@ function InteractiveDemo() {
           rows={4}
           className="w-full bg-background/40 border border-border/40 rounded-2xl p-5 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-all placeholder:text-muted-foreground/40 font-medium leading-relaxed"
         />
-        <div className="flex items-center justify-between mt-4">
-          <p className="text-xs text-muted-foreground/60">Try pasting a real clause or use the example prompts above</p>
+        <div className="flex flex-col sm:flex-row items-center justify-between mt-4 gap-4 sm:gap-2">
+          <p className="text-xs text-muted-foreground/60 text-center sm:text-left">Try pasting a real clause or use the example prompts above</p>
           <motion.button
             whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
             onClick={analyze}
             disabled={!input.trim() || loading}
-            className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-xl font-semibold text-sm disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors"
+            className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-xl font-semibold text-sm disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors w-full sm:w-auto"
           >
             {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Analyzing...</> : <><Send className="w-4 h-4" /> Analyze Clause</>}
           </motion.button>
@@ -375,7 +375,7 @@ export default function LandingPage() {
                 AI-Powered Legal Intelligence
               </motion.div>
 
-              <motion.h1 variants={fadeUp} className="text-5xl sm:text-6xl lg:text-7xl font-heading font-black tracking-tight leading-[1.05] mb-8">
+              <motion.h1 variants={fadeUp} className="text-4xl sm:text-6xl lg:text-7xl font-heading font-black tracking-tight leading-tight sm:leading-[1.05] mb-6 sm:mb-8 text-balance">
                 Your Contracts,
                 <br className="hidden sm:block" />
                 <span className="bg-gradient-to-r from-emerald-400 via-primary to-emerald-400 bg-clip-text text-transparent">
@@ -387,21 +387,21 @@ export default function LandingPage() {
                 Upload any legal agreement and get an instant risk score, plain-English summary, and clause benchmarking — in under 3 seconds.
               </motion.p>
 
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-12">
-                <Link href="/dashboard">
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 mb-12 w-full">
+                <Link href="/dashboard" className="w-full sm:w-auto block">
                   <motion.div
                     whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(16,185,129,0.4)" }}
                     whileTap={{ scale: 0.97 }}
-                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-bold text-base cursor-pointer group"
+                    className="flex justify-center w-full items-center gap-2 bg-primary text-primary-foreground px-6 py-4 rounded-2xl font-bold text-base cursor-pointer group"
                   >
                     Start Analyzing Free
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </motion.div>
                 </Link>
-                <a href="#demo">
+                <a href="#demo" className="w-full sm:w-auto block">
                   <motion.div
                     whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                    className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-8 py-4 rounded-2xl font-bold text-base border border-border/50 cursor-pointer hover:bg-muted/80 transition-colors"
+                    className="flex justify-center w-full items-center gap-2 bg-secondary text-secondary-foreground px-6 py-4 rounded-2xl font-bold text-base border border-border/50 cursor-pointer hover:bg-muted/80 transition-colors"
                   >
                     <Sparkles className="w-4 h-4" /> Try Live Demo
                   </motion.div>
@@ -467,8 +467,8 @@ export default function LandingPage() {
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-6">
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Live Demo
             </motion.div>
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-heading font-black mb-5">
-              See it in action. <span className="text-primary">Right now.</span>
+            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl font-heading font-black mb-5 text-balance">
+              See it in action. <span className="text-primary block sm:inline">Right now.</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Paste any contract clause and watch ClauseGuard instantly identify risks, score the language, and flag deviations from industry standards.
@@ -484,8 +484,8 @@ export default function LandingPage() {
       <section id="how-it-works" className="py-28 bg-muted/10 border-y border-border/40 relative">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} className="text-center mb-20">
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-heading font-black mb-5">
-              From upload to insight in <span className="text-primary">3 steps.</span>
+            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl font-heading font-black mb-5 text-balance">
+              From upload to insight in <span className="text-primary block sm:inline">3 steps.</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-lg text-muted-foreground max-w-xl mx-auto">
               Our streamlined pipeline means you spend less time reading and more time negotiating.
@@ -630,20 +630,20 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl md:text-6xl font-heading font-black mb-8 leading-[1.1] relative z-10">
-                Ready to secure your <br /><span className="text-emerald-400">future agreements?</span>
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-heading font-black mb-6 sm:mb-8 leading-tight sm:leading-[1.1] relative z-10 text-balance">
+                Ready to secure your <br className="hidden sm:block" /><span className="text-emerald-400">future agreements?</span>
               </h2>
-              <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto font-medium relative z-10">
+              <p className="text-lg sm:text-xl text-muted-foreground mb-10 sm:mb-12 max-w-2xl mx-auto font-medium relative z-10">
                 Join 500+ legal teams using ClauseGuard to automate deep-analysis and benchmarking of every contract.
               </p>
-              <Link href="/dashboard">
+              <Link href="/dashboard" className="block w-full sm:w-auto">
                 <motion.div
                   whileHover={{ scale: 1.05, boxShadow: "0 30px 60px -15px rgba(16,185,129,0.45)" }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-3 bg-primary text-primary-foreground text-xl font-extrabold px-12 py-6 rounded-3xl cursor-pointer group relative z-10 transition-all"
+                  className="flex justify-center w-full sm:w-auto items-center gap-3 bg-primary text-primary-foreground text-lg sm:text-xl font-extrabold px-8 sm:px-12 py-4 sm:py-6 rounded-[2rem] sm:rounded-3xl cursor-pointer group relative z-10 transition-all"
                 >
                   Try ClauseGuard for Free
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                  <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform" />
                 </motion.div>
               </Link>
             </motion.div>
