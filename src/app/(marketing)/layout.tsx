@@ -46,15 +46,15 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
               <a href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
             </div>
 
-            <div className="flex items-center gap-4">
-              <Link href="/dashboard" className="text-sm font-medium hover:text-primary transition-colors">
+            <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+              <Link href="/dashboard" className="hidden sm:block text-sm font-medium hover:text-primary transition-colors">
                 Log in
               </Link>
               <Link href="/dashboard">
                 <motion.div
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
-                  className="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all cursor-pointer"
+                  className="bg-primary text-primary-foreground px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all cursor-pointer"
                 >
                   Get Started Free
                 </motion.div>

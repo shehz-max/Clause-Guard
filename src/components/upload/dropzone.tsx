@@ -29,8 +29,17 @@ export function FileDropzone() {
   };
 
   const handleFile = (selectedFile: File) => {
-    if (selectedFile.type !== "text/plain") {
-      setErrorMsg("Please upload a .txt file. PDF support is coming soon.");
+    const validTypes = [
+      "application/pdf",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/msword",
+    ];
+    
+    // Quick fallback check by extension if mime type is missing or generic
+    const isDoc = selectedFile.name.endsWith(".docx") || selectedFile.name.endsWith(".doc") || selectedFile.name.endsWith(".pdf");
+
+    if (!validTypes.includes(selectedFile.type) && !isDoc) {
+      setErrorMsg("Please upload a valid .pdf or .docx file.");
       return;
     }
     setFile(selectedFile);
@@ -54,22 +63,17 @@ export function FileDropzone() {
       
       if (!uploadRes.ok) throw new Error(uploadData.error || "Upload failed");
       
-      const docId = uploadData.document.id;
+      const docId = uploadData.documentId;
       
+      // Backend automatically kicks off analysis. Show fake progress so UI transitions nicely.
       setStatus("analyzing");
-      const analyzeRes = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ documentId: docId })
-      });
       
-      const analyzeData = await analyzeRes.json();
-      if (!analyzeRes.ok) throw new Error(analyzeData.error || "Analysis failed");
-      
-      setStatus("done");
       setTimeout(() => {
-        router.push(`/contract/${docId}`);
-      }, 1000);
+        setStatus("done");
+        setTimeout(() => {
+          router.push(`/contract/${docId}`);
+        }, 1000);
+      }, 1500);
       
     } catch (err: any) {
       console.error(err);
@@ -84,7 +88,7 @@ export function FileDropzone() {
         type="file" 
         ref={fileInputRef} 
         onChange={(e) => e.target.files && handleFile(e.target.files[0])} 
-        accept=".txt" 
+        accept=".pdf,.docx,.doc" 
         className="hidden" 
       />
       
@@ -103,7 +107,7 @@ export function FileDropzone() {
         {/* Decorative background glow */}
         <div className="absolute -top-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none -z-10" />
 
-         <div className="flex flex-col items-center justify-center p-14 text-center min-h-[400px] relative z-10">
+         <div className="flex flex-col items-center justify-center p-6 sm:p-8 md:p-14 text-center min-h-[400px] relative z-10">
            <AnimatePresence mode="wait">
              {status === "idle" && !file && (
                 <motion.div 
@@ -125,7 +129,7 @@ export function FileDropzone() {
                      Drag and drop your legal contract here, or <span onClick={handleClick} className="text-primary font-semibold hover:underline cursor-pointer">browse files</span> to begin AI analysis.
                    </p>
                    <div className="flex items-center gap-3">
-                     <span className="text-[10px] px-3 py-1 bg-white/5 border border-white/10 rounded-full text-muted-foreground font-bold tracking-widest uppercase">.TXT Supported</span>
+                     <span className="text-[10px] px-3 py-1 bg-white/5 border border-white/10 rounded-full text-muted-foreground font-bold tracking-widest uppercase">.PDF, .DOCX Supported</span>
                      <span className="text-[10px] px-3 py-1 bg-white/5 border border-white/10 rounded-full text-muted-foreground font-bold tracking-widest uppercase">Safe & Private</span>
                    </div>
                 </motion.div>
@@ -153,16 +157,16 @@ export function FileDropzone() {
                      </div>
                    )}
                    
-                   <div className="flex items-center gap-4">
+                   <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
                      <button 
                        onClick={(e) => { e.stopPropagation(); setFile(null); }}
-                       className="px-6 py-3.5 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
+                       className="px-6 py-3.5 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors w-full sm:w-auto text-center"
                      >
                        Cancel
                      </button>
                      <button 
                        onClick={(e) => { e.stopPropagation(); processUpload(); }}
-                       className="bg-primary text-primary-foreground font-bold px-10 py-4 rounded-2xl transition-all shadow-xl shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 active:scale-95 flex items-center gap-2 group"
+                       className="bg-primary text-primary-foreground font-bold px-8 sm:px-10 py-4 rounded-2xl transition-all shadow-xl shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2 group w-full sm:w-auto"
                      >
                        <span>Initiate AI Analysis</span>
                        <ArrowRight className="w-4 h-4 transform transition-transform group-hover:translate-x-1" />
