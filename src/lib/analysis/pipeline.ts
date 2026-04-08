@@ -17,18 +17,13 @@ export async function runAnalysisPipeline(documentId: string) {
     const chunks = (chunksData as any[]) || [];
     if (chunkErr || chunks.length === 0) throw new Error('Document chunks not found');
 
-    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
-    const summary = await summarizeContract(doc.raw_text);
-    await sleep(1000); // Rate limiter delay buffer for free tier
-
-    const risks = await detectRisks(chunks);
-    await sleep(1000);
-
-    const clause_analyses = await analyzeClauses(chunks);
-    await sleep(1000);
-
-    const best_practice_comparisons = await compareWithBestPractices(chunks);
+    // Parallelize independent AI tasks to optimize speed and stay within Vercel execution limits
+    const [summary, risks, clause_analyses, best_practice_comparisons] = await Promise.all([
+      summarizeContract(doc.raw_text),
+      detectRisks(chunks),
+      analyzeClauses(chunks),
+      compareWithBestPractices(chunks)
+    ]);
     
     const { score, risk_level } = calculateRiskScore(risks);
 

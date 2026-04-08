@@ -4,6 +4,10 @@ import { parseDocument, getFileExtension } from '@/lib/parsers'
 import { chunkDocument, chunkDocumentWithPages } from '@/lib/rag/chunker'
 import { createEmbeddings } from '@/lib/rag/embeddings'
 import { v4 as uuidv4 } from 'uuid'
+import { runAnalysisPipeline } from '@/lib/analysis/pipeline'
+import { waitUntil } from '@vercel/functions'
+
+export const maxDuration = 60
 
 export async function POST(request: NextRequest) {
   try {
@@ -123,13 +127,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Trigger analysis (async)
-    // We don't await this - it runs in background
-    fetch(`${request.nextUrl.origin}/api/analyze`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ documentId }),
-    }).catch(console.error)
+    // [Professional Best Practice]
+    // Use waitUntil to ensure the background task completes reliably 
+    // without blocking the immediate response to the user.
+    waitUntil(
+      runAnalysisPipeline(documentId).catch(err => {
+        console.error(`Background analysis failed for ${documentId}:`, err);
+      })
+    );
 
     return NextResponse.json({
       success: true,
