@@ -52,7 +52,15 @@ ${promptContext}
     // Provide via stream
     return result.toDataStreamResponse();
   } catch (error: any) {
-    console.error('Chat API Error:', error);
-    return NextResponse.json({ error: error.message || 'An error occurred during chat generation' }, { status: 500 });
+    console.error('--- Chat API Error Log ---');
+    console.error('Document ID:', documentId);
+    console.error('Error Message:', error.message);
+    console.error('Stack Trace:', error.stack);
+    console.error('---------------------------');
+    
+    return NextResponse.json({ 
+      error: 'The AI Copilot encountered an issue processing your request. Please ensure you have uploaded a document and try again.',
+      details: error.message 
+    }, { status: 500 });
   }
 }

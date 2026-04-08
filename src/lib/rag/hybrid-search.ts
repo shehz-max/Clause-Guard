@@ -1,4 +1,4 @@
-import { createClient } from '../supabase/server';
+import { createAdminClient } from '../supabase/server';
 import { createEmbedding } from './embeddings';
 
 export interface ChunkMatch {
@@ -35,7 +35,7 @@ export async function hybridSearchChunks(
   keywordWeight: number = 0.3,
   semanticWeight: number = 0.7
 ): Promise<ChunkMatch[]> {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const queryEmbedding = await createEmbedding(query);
 
   const { data, error } = await (supabase as any).rpc('hybrid_search_chunks', {
@@ -65,7 +65,7 @@ export async function hybridSearchKnowledgeBase(
   keywordWeight: number = 0.3,
   semanticWeight: number = 0.7
 ): Promise<KBMatch[]> {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const queryEmbedding = await createEmbedding(query);
 
   const { data, error } = await (supabase as any).rpc('hybrid_search_knowledge_base', {
