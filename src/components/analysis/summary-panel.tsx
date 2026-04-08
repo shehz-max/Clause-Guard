@@ -1,5 +1,6 @@
 import { ShieldAlert, TrendingUp, CheckCircle, Lightbulb, Zap } from "lucide-react";
 import { motion } from "framer-motion";
+import { DeadlineTimeline } from "./deadline-timeline";
 
 export function SummaryPanel({ analysis }: { analysis: any }) {
   if (!analysis) return null;
@@ -53,6 +54,12 @@ export function SummaryPanel({ analysis }: { analysis: any }) {
           </motion.div>
         ))}
       </div>
+
+      {/* Smart Deadline Timeline — auto-renders if key_dates exist */}
+      {analysis.key_dates && analysis.key_dates.length > 0 && (
+        <DeadlineTimeline keyDates={analysis.key_dates} />
+      )}
     </div>
   );
 }
+

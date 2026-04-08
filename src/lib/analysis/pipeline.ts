@@ -4,6 +4,7 @@ import { detectRisks } from './risk-detector';
 import { analyzeClauses } from './clause-analyzer';
 import { compareWithBestPractices } from './comparator';
 import { calculateRiskScore } from './scorer';
+import { extractKeyDates } from './deadline-extractor';
 
 export async function runAnalysisPipeline(documentId: string) {
   const supabase = await createClient();
@@ -17,12 +18,13 @@ export async function runAnalysisPipeline(documentId: string) {
     const chunks = (chunksData as any[]) || [];
     if (chunkErr || chunks.length === 0) throw new Error('Document chunks not found');
 
-    // Parallelize independent AI tasks to optimize speed and stay within Vercel execution limits
-    const [summary, risks, clause_analyses, best_practice_comparisons] = await Promise.all([
+    // Parallelize ALL independent AI tasks — maximum speed, minimum latency
+    const [summary, risks, clause_analyses, best_practice_comparisons, key_dates] = await Promise.all([
       summarizeContract(doc.raw_text),
       detectRisks(chunks),
       analyzeClauses(chunks),
-      compareWithBestPractices(chunks)
+      compareWithBestPractices(chunks),
+      extractKeyDates(doc.raw_text),
     ]);
     
     const { score, risk_level } = calculateRiskScore(risks);
@@ -35,6 +37,7 @@ export async function runAnalysisPipeline(documentId: string) {
       risks,
       clause_analyses,
       best_practice_comparisons,
+      key_dates,
       metadata: { completed_at: new Date().toISOString() }
     }).select().single();
 
@@ -45,7 +48,7 @@ export async function runAnalysisPipeline(documentId: string) {
     return analysis;
   } catch (error: any) {
     console.error('Final Pipeline Error:', error);
-    await (supabase.from('documents') as any).update({ status: 'error' }).eq('id', documentId);
+    await (supabase.from('documents') as any).update({ status: 'error', error_message: error.message }).eq('id', documentId);
     throw error;
   }
 }

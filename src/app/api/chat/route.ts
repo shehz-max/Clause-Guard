@@ -3,8 +3,8 @@ import { models } from '../../../lib/groq';
 import { processRagQuery } from '../../../lib/rag/retriever';
 import { NextResponse } from 'next/server';
 
-// Allow streaming responses up to 30 seconds
-export const maxDuration = 30;
+// Allow streaming responses up to 60 seconds (quality model needs more time)
+export const maxDuration = 60;
 
 export async function POST(req: Request) {
   try {
@@ -26,24 +26,25 @@ export async function POST(req: Request) {
     const { promptContext, citationMap } = await processRagQuery(userQuery, documentId);
 
     // Provide detailed instructions to the model on how to use citations
-    const systemPrompt = `You are a specialized legal AI assistant named ClauseGuard.
-Your goal is to answer the user's questions about their contract based strictly on the provided context.
+    const systemPrompt = `You are ClauseGuard Copilot, an elite AI legal analyst with deep expertise in contract law, risk assessment, and legal negotiation strategy.
 
-DOCUMENT CONTEXT EXCERPTS:
-You have been provided with excerpts from the contract. Each excerpt starts with a citation tag like [1], [2], etc.
+Your primary goal is to answer the user's questions about their contract accurately and precisely.
 
-INSTRUCTIONS:
-1. You MUST use the provided context to answer the question. 
-2. Whenever you state a fact or reference a clause from the document context, you MUST append the citation bracket (e.g., "[1]") immediately after the sentence or clause.
-3. If the context does not contain the answer, explicitly state that the information is not present in the provided contract. Do not hallucinate.
-4. If Knowledge Base (KB) information is provided, you can use it to give general advice or highlight risks, but make sure to distinguish it from the actual contract text.
+CORE GUIDELINES:
+1. ALWAYS ground your answers in the provided DOCUMENT CONTEXT below. Do not hallucinate clauses.
+2. After EVERY sentence that references the document, append the citation bracket e.g. [1], [2]. This is mandatory.
+3. If the context doesn't answer the question, say: "This information is not present in the provided contract."
+4. When asked about risks, provide actionable negotiation language — not just observations.
+5. Use plain English. Your user may not be a lawyer.
+6. Structure your answers with clear headings when the response is long.
+7. If General Legal Knowledge Base (KB) items are provided, use them to contextualize best practices — but clearly distinguish them from the actual contract.
 
 CONTEXT:
 ${promptContext}
 `;
 
     const result = streamText({
-      model: models.default,
+      model: models.quality,
       system: systemPrompt,
       messages: messages,
     });
