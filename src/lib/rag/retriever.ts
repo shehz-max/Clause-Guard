@@ -1,15 +1,15 @@
 import { hybridSearchChunks, hybridSearchKnowledgeBase } from './hybrid-search';
-import { evaluateRetrievalRelevance } from './corrective-rag';
 import { generateCitationMap, formatContextWithCitations } from './citations';
+import { rerankLegalChunks } from './reranker';
 
 export async function processRagQuery(query: string, documentId: string) {
-  // 1. Initial Retrieval from Document
-  // We use 10 chunks to ensure high recall without the extra CRAG step
-  let chunks = await hybridSearchChunks(query, documentId, 10, 0.4, 0.6);
+  // 1. Initial Retrieval (High Recall)
+  // Retrieve 15 chunks to ensure we don't miss nuanced information
+  const initialChunks = await hybridSearchChunks(query, documentId, 15, 0.4, 0.6);
   
-  // 2. Corrective Validation (Skipped for performance and rate-limit safety)
-  // Let the main LLM handle the relevance filtering within the prompt context
-  // chunks = await evaluateRetrievalRelevance(query, chunks);
+  // 2. Legal Reranking (High Precision)
+  // Use Judge AI to narrow down to the 5 absolute most relevant clauses
+  const chunks = await rerankLegalChunks(query, initialChunks, 5);
   
   // 3. Fallback/Supplement from Knowledge Base if relevant chunks are too few
   let kbResults = '';

@@ -43,22 +43,37 @@ CONTEXT:
 ${promptContext}
 `;
 
-    const result = streamText({
-      model: models.quality,
-      system: systemPrompt,
-      messages: messages,
-    });
+    try {
+      // Primary attempt with Quality Model (70B)
+      const result = streamText({
+        model: models.quality,
+        system: systemPrompt,
+        messages: messages,
+      });
+      return result.toDataStreamResponse();
+    } catch (primaryError: any) {
+      // Check for Rate Limit (429) or other API errors
+      if (primaryError?.status === 429 || primaryError?.message?.includes('429')) {
+        console.warn('Groq 70B rate limited. Sliding down to 8B model for UI stability.');
+        const fallbackResult = streamText({
+          model: models.fast,
+          system: systemPrompt,
+          messages: messages,
+        });
+        return fallbackResult.toDataStreamResponse();
+      }
+      throw primaryError; // Re-throw if it's not a rate limit (will be caught by main catch)
+    }
 
-    // Provide via stream
-    return result.toDataStreamResponse();
   } catch (error: any) {
     console.error('--- Chat API Error Log ---');
     console.error('Error Message:', error.message);
     console.error('Stack Trace:', error.stack);
     console.error('---------------------------');
     
+    // Final UI Fallback - even if streaming fails, return a readable error object
     return NextResponse.json({ 
-      error: 'The AI Copilot encountered an issue processing your request. Please ensure you have uploaded a document and try again.',
+      error: 'The AI Copilot is temporarily over-capacity. Please try again in 30 seconds.',
       details: error.message 
     }, { status: 500 });
   }
