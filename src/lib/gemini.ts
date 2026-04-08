@@ -2,9 +2,9 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!)
 
-// Gemini model for embeddings
+// Gemini model for embeddings (Upgraded to text-embedding-004 for 1536-dim support)
 export const embeddingModel = genAI.getGenerativeModel({
-  model: 'gemini-embedding-001',
+  model: 'text-embedding-004',
 })
 
 // Gemini model for text generation (backup option)
@@ -12,7 +12,7 @@ export const generativeModel = genAI.getGenerativeModel({
   model: 'gemini-1.5-flash',
 })
 
-// Embedding dimension
+// Embedding dimension (OpenAI / Modern Standard)
 export const EMBEDDING_DIMENSION = 1536
 
 // Rate limits for Gemini free tier:
@@ -25,14 +25,12 @@ export const GEMINI_RATE_LIMITS = {
 
 // Generate embeddings for text
 export async function generateEmbedding(text: string): Promise<number[]> {
-  const result = await embeddingModel.embedContent(text)
+  const result = await embeddingModel.embedContent({
+    content: { parts: [{ text }] },
+    outputDimensionality: EMBEDDING_DIMENSION
+  })
+  
   const embedding = result.embedding.values
-  
-  // Truncate to 1536 (OpenAI Standard) to satisfy Supabase indexing limits (Matryoshka)
-  if (embedding.length > EMBEDDING_DIMENSION) {
-    return embedding.slice(0, EMBEDDING_DIMENSION)
-  }
-  
   return embedding
 }
 

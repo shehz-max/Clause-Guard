@@ -22,10 +22,15 @@ export async function POST(req: Request) {
     const latestMessage = messages[messages.length - 1];
     const userQuery = latestMessage.content;
 
+    console.log(`[AI Copilot] Starting processing for Document: ${documentId}`);
+
     // Run RAG pipeline
+    console.log(`[AI Copilot] Generating embeddings and retrieving context...`);
     const { promptContext, citationMap } = await processRagQuery(userQuery, documentId);
+    console.log(`[AI Copilot] Context retrieved successfully (${citationMap.length} citations found).`);
 
     // Provide detailed instructions to the model on how to use citations
+    console.log(`[AI Copilot] Initiating stream with preferred model...`);
     const systemPrompt = `You are ClauseGuard Copilot, an elite AI legal analyst with deep expertise in contract law, risk assessment, and legal negotiation strategy.
 
 Your primary goal is to answer the user's questions about their contract accurately and precisely.
