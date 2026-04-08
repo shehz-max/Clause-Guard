@@ -67,7 +67,7 @@ export async function POST(req: Request) {
 
   const supabase = createClient<Database>(supabaseUrl, supabaseKey);
   const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-  const model = genAI.getGenerativeModel({ model: 'text-embedding-004' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-embedding-001' });
 
   const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 

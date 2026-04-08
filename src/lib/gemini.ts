@@ -13,7 +13,7 @@ export const generativeModel = genAI.getGenerativeModel({
 })
 
 // Embedding dimension
-export const EMBEDDING_DIMENSION = 768
+export const EMBEDDING_DIMENSION = 3072
 
 // Rate limits for Gemini free tier:
 // - 15 RPM (requests per minute)
@@ -26,14 +26,7 @@ export const GEMINI_RATE_LIMITS = {
 // Generate embeddings for text
 export async function generateEmbedding(text: string): Promise<number[]> {
   const result = await embeddingModel.embedContent(text)
-  const embedding = result.embedding.values
-  
-  // Truncate to match Supabase pgvector constraint (Matryoshka learning down-projection)
-  if (embedding.length > EMBEDDING_DIMENSION) {
-    return embedding.slice(0, EMBEDDING_DIMENSION)
-  }
-  
-  return embedding
+  return result.embedding.values
 }
 
 // Generate embeddings for multiple texts (batch)
