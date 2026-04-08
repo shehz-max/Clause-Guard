@@ -73,7 +73,8 @@ export async function POST(req: Request) {
 
   async function embedText(text: string): Promise<number[]> {
     const result = await model.embedContent(text);
-    return result.embedding.values;
+    const embedding = result.embedding.values;
+    return embedding.length > 1536 ? embedding.slice(0, 1536) : embedding;
   }
 
   try {
