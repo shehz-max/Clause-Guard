@@ -149,12 +149,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-
-// Set max body size for uploads
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '50mb',
-    },
-  },
-}
