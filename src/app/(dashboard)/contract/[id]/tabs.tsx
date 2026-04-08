@@ -18,7 +18,7 @@ export function ContractTabs({ document, analysis }: { document: any, analysis: 
   ];
 
   if (!analysis && activeTab !== "chat") {
-    const isFailed = document.status === "failed";
+    const isFailed = document.status === "error";
     
     return (
       <div className="flex-1 flex flex-col items-center justify-center min-h-0 bg-card/40 border border-border/50 rounded-2xl p-12 text-center">
@@ -29,20 +29,37 @@ export function ContractTabs({ document, analysis }: { document: any, analysis: 
             </div>
             <h3 className="text-2xl font-heading font-bold text-foreground mb-2">Analysis Failed</h3>
             <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed">
-              We encountered an error while processing this contract. This can happen with highly complex formatting or encrypted files.
+              {document.error_message || "We encountered an error while processing this contract. This can happen with highly complex formatting or encrypted files."}
             </p>
-            <button 
-              onClick={() => window.location.reload()}
-              className="mt-8 px-6 py-2.5 bg-secondary text-secondary-foreground rounded-xl font-bold text-sm hover:bg-secondary/80 transition-all border border-border/40"
-            >
-              Retry Connection
-            </button>
+            <div className="flex flex-col sm:flex-row gap-3 mt-8">
+              <button 
+                onClick={() => window.location.reload()}
+                className="px-6 py-2.5 bg-secondary text-secondary-foreground rounded-xl font-bold text-sm hover:bg-secondary/80 transition-all border border-border/40"
+              >
+                Retry Connection
+              </button>
+              <button 
+                onClick={() => window.location.href = '/dashboard'}
+                className="px-6 py-2.5 bg-primary text-primary-foreground rounded-xl font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+              >
+                Back to Dashboard
+              </button>
+            </div>
           </>
         ) : (
           <>
-            <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
-            <h3 className="text-xl font-semibold text-foreground">Analyzing Document...</h3>
-            <p className="text-muted-foreground">The AI engine is currently processing this contract.</p>
+            <div className="flex flex-col items-center gap-6">
+              <div className="relative">
+                <Loader2 className="w-16 h-16 text-primary animate-spin" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                   <div className="w-8 h-8 bg-primary/20 rounded-full animate-pulse" />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-2xl font-heading font-bold text-foreground mb-2">Analyzing Document...</h3>
+                <p className="text-muted-foreground max-w-xs mx-auto">Our AI engine is reading, scoring, and benchmarking your contract clauses.</p>
+              </div>
+            </div>
           </>
         )}
       </div>

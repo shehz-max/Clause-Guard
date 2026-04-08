@@ -130,7 +130,8 @@ export function ExportButton({ document, analysis }: ExportButtonProps) {
         pdf.roundedRect(margin, cursorY, pageWidth - margin * 2, 12, 2, 2, "F");
         pdf.setTextColor(40, 40, 50);
         pdf.setFont("helvetica", "italic");
-        pdf.text(`Rec: ${risk.recommendation.substring(0, 100)}...`, margin + 4, cursorY + 7);
+        const rec = risk.recommendation || "Maintain standard legal review procedures for this clause.";
+        pdf.text(`Rec: ${rec.substring(0, 100)}${rec.length > 100 ? "..." : ""}`, margin + 4, cursorY + 7);
         cursorY += 20;
       });
 

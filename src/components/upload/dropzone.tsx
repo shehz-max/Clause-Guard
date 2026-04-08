@@ -39,7 +39,7 @@ export function FileDropzone() {
     const isDoc = selectedFile.name.endsWith(".docx") || selectedFile.name.endsWith(".doc") || selectedFile.name.endsWith(".pdf");
 
     if (!validTypes.includes(selectedFile.type) && !isDoc) {
-      setErrorMsg("Please upload a valid .pdf or .docx file.");
+      setErrorMsg("Please upload a valid .pdf, .docx, or .doc file.");
       return;
     }
     setFile(selectedFile);

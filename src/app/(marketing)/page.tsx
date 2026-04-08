@@ -375,7 +375,7 @@ export default function LandingPage() {
                 AI-Powered Legal Intelligence
               </motion.div>
 
-              <motion.h1 variants={fadeUp} className="text-4xl sm:text-6xl lg:text-7xl font-heading font-black tracking-tight leading-tight sm:leading-[1.05] mb-6 sm:mb-8 text-balance">
+              <motion.h1 variants={fadeUp} className="text-4xl sm:text-6xl lg:text-7xl font-heading font-black tracking-tight leading-tight sm:leading-[1.05] mb-6 sm:mb-8 text-balance text-center lg:text-left">
                 Your Contracts,
                 <br className="hidden sm:block" />
                 <span className="bg-gradient-to-r from-emerald-400 via-primary to-emerald-400 bg-clip-text text-transparent">
@@ -383,32 +383,32 @@ export default function LandingPage() {
                 </span>
               </motion.h1>
 
-              <motion.p variants={fadeUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-lg mb-10 font-medium">
+              <motion.p variants={fadeUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-lg mb-10 font-medium text-center lg:text-left mx-auto lg:mx-0">
                 Upload any legal agreement and get an instant risk score, plain-English summary, and clause benchmarking — in under 3 seconds.
               </motion.p>
 
-              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 mb-12 w-full">
-                <Link href="/dashboard" className="w-full sm:w-auto block">
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 mb-12 w-full justify-center lg:justify-start items-center">
+                <Link href="/dashboard" className="w-full sm:w-auto">
                   <motion.div
                     whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(16,185,129,0.4)" }}
                     whileTap={{ scale: 0.97 }}
-                    className="flex justify-center w-full items-center gap-2 bg-primary text-primary-foreground px-6 py-4 rounded-2xl font-bold text-base cursor-pointer group"
+                    className="flex justify-center items-center gap-2 bg-primary text-primary-foreground px-6 py-4 rounded-2xl font-bold text-base cursor-pointer group"
                   >
                     Start Analyzing Free
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </motion.div>
                 </Link>
-                <a href="#demo" className="w-full sm:w-auto block">
+                <a href="#demo" className="w-full sm:w-auto">
                   <motion.div
                     whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                    className="flex justify-center w-full items-center gap-2 bg-secondary text-secondary-foreground px-6 py-4 rounded-2xl font-bold text-base border border-border/50 cursor-pointer hover:bg-muted/80 transition-colors"
+                    className="flex justify-center items-center gap-2 bg-secondary text-secondary-foreground px-6 py-4 rounded-2xl font-bold text-base border border-border/50 cursor-pointer hover:bg-muted/80 transition-colors"
                   >
                     <Sparkles className="w-4 h-4" /> Try Live Demo
                   </motion.div>
                 </a>
               </motion.div>
 
-              <motion.div variants={fadeUp} className="flex items-center gap-4">
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
                 <div className="flex -space-x-3">
                   {["A","B","C","D","E"].map((l, i) => (
                     <div key={i} className="w-9 h-9 rounded-full border-2 border-background bg-gradient-to-br from-emerald-500/20 to-primary/20 flex items-center justify-center text-xs font-black text-primary">
@@ -416,7 +416,7 @@ export default function LandingPage() {
                     </div>
                   ))}
                 </div>
-                <p className="text-sm text-muted-foreground"><span className="font-bold text-foreground">500+</span> legal professionals trust ClauseGuard</p>
+                <p className="text-sm text-muted-foreground text-center sm:text-left font-medium"><span className="font-bold text-foreground">500+</span> legal professionals trust ClauseGuard</p>
               </motion.div>
             </motion.div>
 
