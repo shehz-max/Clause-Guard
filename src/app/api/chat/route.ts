@@ -53,7 +53,6 @@ ${promptContext}
     return result.toDataStreamResponse();
   } catch (error: any) {
     console.error('--- Chat API Error Log ---');
-    console.error('Document ID:', documentId);
     console.error('Error Message:', error.message);
     console.error('Stack Trace:', error.stack);
     console.error('---------------------------');
