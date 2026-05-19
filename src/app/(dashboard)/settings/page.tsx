@@ -19,48 +19,48 @@ export default async function SettingsPage() {
     .select('*', { count: 'exact', head: true });
 
   const stats = [
-    { label: "Knowledge Base Entries", value: kbCount || 0, icon: Database, color: "text-emerald-600" },
-    { label: "Total Documents", value: docCount || 0, icon: Shield, color: "text-blue-600" },
-    { label: "Analysis Reports", value: analysisCount || 0, icon: Zap, color: "text-purple-600" },
+    { label: "Knowledge Base Entries", value: kbCount || 0, icon: Database, color: "text-[#059669]" },
+    { label: "Total Documents", value: docCount || 0, icon: Shield, color: "text-[#1E3A5F]" },
+    { label: "Analysis Reports", value: analysisCount || 0, icon: Zap, color: "text-[#0F766E]" },
   ];
 
   return (
     <div className="min-h-screen pb-12">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Settings</h1>
-          <p className="text-slate-500 mt-1">Manage your system configuration</p>
+          <h1 className="text-3xl font-bold text-[#1E293B] tracking-tight">Settings</h1>
+          <p className="text-[#64748B] mt-1">Manage your system configuration</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {stats.map((stat, i) => (
-            <div key={i} className="bg-white rounded-2xl p-6 border border-slate-200">
-              <div className={`w-10 h-10 rounded-xl ${stat.color} bg-current/10 flex items-center justify-center mb-4 border border-current/10`}>
+            <div key={i} className="bg-white rounded-xl p-6 border border-[#E2E8F0]">
+              <div className={`w-10 h-10 bg-[#F1F5F9] ${stat.color} rounded-lg flex items-center justify-center mb-4`}>
                 <stat.icon className="w-5 h-5" />
               </div>
-              <div className="text-2xl font-bold text-slate-900 mb-1">{stat.value}</div>
-              <div className="text-sm text-slate-500">{stat.label}</div>
+              <div className="text-2xl font-bold text-[#1E293B] mb-1">{stat.value}</div>
+              <div className="text-sm text-[#64748B]">{stat.label}</div>
             </div>
           ))}
         </div>
 
-        <div className="bg-white rounded-2xl p-8 border border-slate-200">
+        <div className="bg-white rounded-xl p-8 border border-[#E2E8F0]">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-2">Knowledge Base Sync</h3>
-              <p className="text-slate-500 text-sm max-w-md mb-4">
+              <h3 className="text-lg font-semibold text-[#1E293B] mb-2">Knowledge Base Sync</h3>
+              <p className="text-[#64748B] text-sm max-w-md mb-4">
                 Sync the legal knowledge base with industry standards and best practices.
               </p>
-              <div className="flex items-center gap-4 text-xs text-slate-500">
-                <span className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-emerald-500" /> Database Connected</span>
-                <span className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-emerald-500" /> AI Ready</span>
+              <div className="flex items-center gap-4 text-xs text-[#64748B]">
+                <span className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#059669]" /> Database Connected</span>
+                <span className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#059669]" /> AI Ready</span>
               </div>
             </div>
 
             <form action="/api/knowledge-base/status" method="POST">
               <button 
                 type="submit"
-                className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-semibold px-6 py-3 rounded-xl flex items-center gap-2 hover:shadow-lg hover:shadow-emerald-500/25 transition-all"
+                className="bg-[#1E3A5F] hover:bg-[#152C4A] text-white font-semibold px-6 py-3 rounded-lg flex items-center gap-2 transition-colors"
               >
                 <RefreshCw className="w-4 h-4" />
                 Sync Knowledge Base

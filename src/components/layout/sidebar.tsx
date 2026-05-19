@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { LayoutDashboard, Upload, Settings, Shield, Menu } from "lucide-react";
+import { LayoutDashboard, Upload, Settings, Menu } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 
 const links = [
@@ -15,13 +15,13 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="w-64 h-screen bg-[#121218] border-r border-white/5 flex flex-col shrink-0 hidden md:flex">
-      <div className="p-6 border-b border-white/5">
+    <div className="w-64 h-screen bg-white border-r border-[#E2E8F0] flex flex-col shrink-0 hidden md:flex">
+      <div className="p-6 border-b border-[#F1F5F9]">
         <Logo variant="full" size="md" />
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
-        <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-4 px-3">Menu</p>
+        <p className="text-[11px] font-bold text-[#94A3B8] uppercase tracking-wider mb-4 px-3">Menu</p>
         {links.map((link) => {
           const active = pathname === link.href || pathname.startsWith(link.href + '/');
           return (
@@ -29,12 +29,12 @@ export function Sidebar() {
               {active && (
                 <motion.div
                   layoutId="sidebar-active"
-                  className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-xl border border-indigo-500/20"
+                  className="absolute inset-0 bg-[#CCFBF1] rounded-lg"
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
-              <div className={`relative flex items-center px-3 py-3 rounded-xl text-sm transition-colors ${active ? "text-white font-semibold" : "text-slate-400 hover:text-white hover:bg-white/5"}`}>
-                <link.icon className={`w-4 h-4 mr-3 ${active ? "text-indigo-400" : "text-slate-500"}`} />
+              <div className={`relative flex items-center px-3 py-3 rounded-lg text-sm transition-colors ${active ? "text-[#0F766E] font-semibold" : "text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F8FAFC]"}`}>
+                <link.icon className={`w-4 h-4 mr-3 ${active ? "text-[#0F766E]" : "text-[#94A3B8]"}`} />
                 {link.name}
               </div>
             </Link>
@@ -42,16 +42,16 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="p-4 border-t border-white/5">
+      <div className="p-4 border-t border-[#F1F5F9]">
         <Link 
           href="/settings"
-          className={`flex items-center px-3 py-3 text-sm rounded-xl transition-all ${
+          className={`flex items-center px-3 py-3 text-sm rounded-lg transition-colors ${
             pathname === "/settings" 
-              ? "bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-white font-semibold border border-indigo-500/20" 
-              : "text-slate-400 hover:text-white hover:bg-white/5"
+              ? "bg-[#CCFBF1] text-[#0F766E] font-semibold" 
+              : "text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F8FAFC]"
           }`}
         >
-          <Settings className={`w-4 h-4 mr-3 ${pathname === "/settings" ? "text-indigo-400" : "text-slate-500"}`} />
+          <Settings className={`w-4 h-4 mr-3 ${pathname === "/settings" ? "text-[#0F766E]" : "text-[#94A3B8]"}`} />
           Settings
         </Link>
       </div>

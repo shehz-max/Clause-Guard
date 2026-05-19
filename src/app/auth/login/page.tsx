@@ -42,128 +42,109 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0A0A0F] relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-[128px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/20 rounded-full blur-[128px]" />
-      </div>
-
-      <div className="w-full max-w-md px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8"
-        >
-          <Link href="/" className="inline-block mb-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC] p-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="w-full max-w-md"
+      >
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <Link href="/" className="inline-block">
             <Logo variant="full" size="lg" />
           </Link>
-          <h1 className="text-3xl font-bold text-white mb-2">Welcome back</h1>
-          <p className="text-slate-400">Sign in to your ClauseGuard account</p>
-        </motion.div>
+          <h1 className="text-2xl font-bold text-[#1E293B] mt-6 mb-2">Welcome back</h1>
+          <p className="text-[#64748B]">Sign in to your ClauseGuard account</p>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-3xl blur-xl" />
-          
-          <div className="relative glass-strong rounded-3xl p-8 border border-white/10">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {error && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl p-4 text-sm"
-                >
-                  {error}
-                </motion.div>
-              )}
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                  Email address
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all"
-                  placeholder="you@example.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-2">
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="w-full px-4 py-3 pr-12 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all"
-                    placeholder="••••••••"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors p-1"
-                  >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                  </button>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="group relative w-full"
+        {/* Form Card */}
+        <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-8">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-[#FEE2E2] border border-[#FECACA] text-[#E11D48] rounded-lg p-4 text-sm"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
-                <div className="relative flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 disabled:opacity-50 text-white font-semibold py-3 px-4 rounded-xl transition-all">
-                  {loading ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Signing in...
-                    </>
-                  ) : (
-                    'Sign in'
-                  )}
-                </div>
-              </button>
-            </form>
+                {error}
+              </motion.div>
+            )}
 
-            <div className="mt-6 text-center">
-              <p className="text-slate-400 text-sm">
-                Don&apos;t have an account?{' '}
-                <Link href="/auth/signup" className="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">
-                  Sign up
-                </Link>
-              </p>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-[#475569] mb-2">
+                Email address
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full px-4 py-3 bg-white border border-[#E2E8F0] rounded-lg text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#0F766E] focus:ring-2 focus:ring-[#CCFBF1] transition-colors"
+                placeholder="you@example.com"
+              />
             </div>
-          </div>
-        </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-center text-slate-500 text-sm mt-8"
-        >
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-[#475569] mb-2">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 pr-12 bg-white border border-[#E2E8F0] rounded-lg text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#0F766E] focus:ring-2 focus:ring-[#CCFBF1] transition-colors"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#475569] transition-colors p-1"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            <motion.button
+              type="submit"
+              disabled={loading}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              className="w-full bg-[#1E3A5F] hover:bg-[#152C4A] disabled:opacity-50 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                'Sign in'
+              )}
+            </motion.button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <p className="text-[#64748B] text-sm">
+              Don&apos;t have an account?{' '}
+              <Link href="/auth/signup" className="text-[#0F766E] hover:text-[#0D9488] font-medium transition-colors">
+                Sign up
+              </Link>
+            </p>
+          </div>
+        </div>
+
+        <p className="text-center text-[#94A3B8] text-xs mt-8">
           By signing in, you agree to our{' '}
-          <a href="#" className="text-slate-400 hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" className="text-[#64748B] hover:text-[#1E3A5F] transition-colors">Terms of Service</a>
           {' '}and{' '}
-          <a href="#" className="text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
-        </motion.p>
-      </div>
+          <a href="#" className="text-[#64748B] hover:text-[#1E3A5F] transition-colors">Privacy Policy</a>
+        </p>
+      </motion.div>
     </div>
   )
 }
