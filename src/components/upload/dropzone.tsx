@@ -102,15 +102,15 @@ export function FileDropzone() {
         onDragOver={handleDrag}
         onDrop={handleDrop}
         onClick={handleClick}
-        className={`relative cursor-pointer bg-gradient-to-br from-card to-card/50 border-2 border-dashed rounded-3xl transition-all duration-300 ${
+        className={`relative cursor-pointer bg-white border-2 border-dashed rounded-3xl transition-all duration-300 ${
           isDragging 
-            ? "border-emerald-500 bg-emerald-500/5 scale-[1.02]" 
+            ? "border-emerald-500 bg-emerald-50 scale-[1.01]" 
             : status === "idle" || status === "error"
-              ? "border-border/50 hover:border-primary/30 hover:bg-card/80"
+              ? "border-slate-300 hover:border-emerald-400 hover:bg-slate-50"
               : "border-transparent cursor-default"
         }`}
       >
-        <div className="p-10 md:p-14 text-center min-h-[350px] flex flex-col items-center justify-center">
+        <div className="p-8 md:p-12 text-center min-h-[300px] flex flex-col items-center justify-center">
            <AnimatePresence mode="wait">
              {status === "idle" && !file && (
                <motion.div 
@@ -123,18 +123,19 @@ export function FileDropzone() {
                >
                   <motion.div 
                     whileHover={{ scale: 1.1, y: -5 }}
-                    className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border border-emerald-500/20 flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/10"
+                    whileTap={{ scale: 0.95 }}
+                    className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 border-2 border-emerald-200 flex items-center justify-center mb-6 shadow-lg"
                   >
-                    <UploadCloud className="w-9 h-9 text-emerald-400" strokeWidth={1.5} />
+                    <UploadCloud className="w-9 h-9 text-emerald-600" strokeWidth={1.5} />
                   </motion.div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3">Drop your contract here</h3>
-                  <p className="text-muted-foreground mb-6 max-w-sm">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-3">Drop your contract here</h3>
+                  <p className="text-slate-500 mb-6 max-w-sm">
                     or click to browse files
                   </p>
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs px-3 py-1.5 bg-muted rounded-lg text-muted-foreground font-medium">.PDF</span>
-                    <span className="text-xs px-3 py-1.5 bg-muted rounded-lg text-muted-foreground font-medium">.DOCX</span>
-                    <span className="text-xs px-3 py-1.5 bg-muted rounded-lg text-muted-foreground font-medium">.DOC</span>
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    <span className="text-xs px-3 py-1.5 bg-slate-100 rounded-lg text-slate-600 font-medium">.PDF</span>
+                    <span className="text-xs px-3 py-1.5 bg-slate-100 rounded-lg text-slate-600 font-medium">.DOCX</span>
+                    <span className="text-xs px-3 py-1.5 bg-slate-100 rounded-lg text-slate-600 font-medium">.DOC</span>
                   </div>
                </motion.div>
             )}
@@ -148,30 +149,30 @@ export function FileDropzone() {
                  transition={{ duration: 0.3 }}
                  className="flex flex-col items-center w-full"
                >
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center mb-6">
-                    <File className="w-7 h-7 text-primary" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 border-2 border-emerald-200 flex items-center justify-center mb-6">
+                    <File className="w-7 h-7 text-emerald-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-1 truncate max-w-[300px]">{file.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-8">{formatFileSize(file.size)}</p>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-1 truncate max-w-[300px]">{file.name}</h3>
+                  <p className="text-sm text-slate-500 mb-8">{formatFileSize(file.size)}</p>
                   
                   {status === "error" && (
-                    <div className="mb-6 px-4 py-3 bg-red-500/10 text-red-400 text-sm font-medium rounded-xl border border-red-500/20 flex items-center gap-2">
+                    <div className="mb-6 px-4 py-3 bg-red-50 text-red-600 text-sm font-medium rounded-xl border border-red-100 flex items-center gap-2">
                        <AlertCircle className="w-4 h-4" />
                        {errorMsg}
                     </div>
                   )}
                   
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto justify-center">
                     <button 
                       onClick={(e) => { e.stopPropagation(); setFile(null); setErrorMsg(""); }}
-                      className="px-5 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                      className="px-5 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors flex items-center gap-2"
                     >
                       <X className="w-4 h-4" />
                       Remove
                     </button>
                     <button 
                       onClick={(e) => { e.stopPropagation(); processUpload(); }}
-                      className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold px-6 py-3 rounded-xl transition-all shadow-lg shadow-primary/20 hover:shadow-primary/30 flex items-center gap-2"
+                      className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-semibold px-6 py-3 rounded-xl transition-all shadow-lg shadow-emerald-500/25 flex items-center gap-2"
                     >
                       <span>Start Analysis</span>
                       <ArrowRight className="w-4 h-4" />
@@ -183,41 +184,41 @@ export function FileDropzone() {
             {status === "uploading" && (
                <motion.div key="uploading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center">
                   <div className="w-16 h-16 mb-6 relative">
-                    <div className="absolute inset-0 border-4 border-primary/20 rounded-full" />
+                    <div className="absolute inset-0 border-4 border-emerald-200 rounded-full" />
                     <motion.div 
-                      className="absolute inset-0 border-4 border-primary rounded-full border-t-transparent"
+                      className="absolute inset-0 border-4 border-emerald-600 rounded-full border-t-transparent"
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                     />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">Uploading document...</h3>
-                  <p className="text-muted-foreground text-sm">Preparing for analysis</p>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">Uploading document...</h3>
+                  <p className="text-slate-500 text-sm">Preparing for analysis</p>
                </motion.div>
             )}
 
             {status === "analyzing" && (
                <motion.div key="analyzing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center">
                   <div className="w-16 h-16 mb-6 relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 rounded-full" />
-                    <div className="absolute inset-0 border-4 border-emerald-500/30 rounded-full" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-full" />
+                    <div className="absolute inset-0 border-4 border-emerald-200 rounded-full" />
                     <motion.div 
-                      className="absolute inset-0 border-4 border-t-emerald-500 border-r-transparent border-b-transparent border-l-transparent rounded-full"
+                      className="absolute inset-0 border-4 border-t-emerald-600 border-r-transparent border-b-transparent border-l-transparent rounded-full"
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
                     />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">AI Analysis in Progress</h3>
-                  <p className="text-muted-foreground text-sm">Scanning clauses and identifying risks...</p>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">AI Analysis in Progress</h3>
+                  <p className="text-slate-500 text-sm">Scanning clauses and identifying risks...</p>
                </motion.div>
             )}
 
             {status === "done" && (
                <motion.div key="done" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center">
-                  <div className="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6 border border-emerald-500/20">
-                    <CheckCircle className="w-8 h-8 text-emerald-400" />
+                  <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-6 border-2 border-emerald-200">
+                    <CheckCircle className="w-8 h-8 text-emerald-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">Analysis Complete</h3>
-                  <p className="text-muted-foreground text-sm">Redirecting to results...</p>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">Analysis Complete</h3>
+                  <p className="text-slate-500 text-sm">Redirecting to results...</p>
                </motion.div>
             )}
           </AnimatePresence>
