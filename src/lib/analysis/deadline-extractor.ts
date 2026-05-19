@@ -9,8 +9,9 @@ export interface KeyDate {
   urgency: 'high' | 'medium' | 'low';
 }
 
-export async function extractKeyDates(fullText: string): Promise<KeyDate[]> {
-  const textContext = fullText.slice(0, 18000);
+export async function extractKeyDates(chunks: any[]): Promise<KeyDate[]> {
+   // Join all chunk text content for date extraction
+   const textContext = chunks.map((c: any) => c.content).join('\n').slice(0, 18000);
 
   const prompt = `You are a contract date extraction specialist. 
 Your task is to identify ALL critical dates, deadlines, and time-sensitive obligations mentioned in this contract.

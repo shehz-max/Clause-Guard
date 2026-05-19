@@ -8,12 +8,11 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-full flex bg-background text-foreground selection:bg-primary/20 overflow-hidden">
+    <div className="min-h-screen bg-background flex">
       <Sidebar />
-      <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
-        <div className="absolute inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background" />
+      <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
-        <main className="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth z-0">
+        <main className="flex-1 overflow-y-auto p-6 md:p-8 scroll-smooth">
           {children}
         </main>
       </div>

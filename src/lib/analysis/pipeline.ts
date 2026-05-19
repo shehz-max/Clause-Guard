@@ -24,7 +24,7 @@ export async function runAnalysisPipeline(documentId: string) {
       detectRisks(chunks),
       analyzeClauses(chunks),
       compareWithBestPractices(chunks),
-      extractKeyDates(doc.raw_text),
+      extractKeyDates(chunks),
     ]);
     
     const { score, risk_level } = calculateRiskScore(risks);
