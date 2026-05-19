@@ -27,7 +27,6 @@ export const GEMINI_RATE_LIMITS = {
 export async function generateEmbedding(text: string): Promise<number[]> {
   const result = await embeddingModel.embedContent({
     content: { role: 'user', parts: [{ text }] },
-    outputDimensionality: EMBEDDING_DIMENSION
   })
   
   const embedding = result.embedding.values
