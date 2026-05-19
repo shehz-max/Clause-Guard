@@ -27,42 +27,45 @@ export function Header() {
 
   return (
     <>
-      <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 md:px-6 z-30">
+      <header className="h-16 bg-[#121218] border-b border-white/5 flex items-center justify-between px-4 md:px-6 z-30">
         <div className="flex items-center gap-4">
           <button 
             onClick={() => setIsMobileMenuOpen(true)}
-            className="p-2 text-slate-600 hover:text-slate-900 md:hidden"
+            className="p-2 text-slate-400 hover:text-white md:hidden"
           >
             <Menu className="w-5 h-5" />
           </button>
 
           <div className="relative w-full max-w-md hidden md:block">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
             <input 
               type="text" 
               placeholder="Search contracts..." 
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all placeholder:text-slate-400"
+              className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500/30 transition-all placeholder:text-slate-500 text-white"
             />
           </div>
         </div>
         
         <div className="flex items-center gap-3 md:gap-5">
-          <button className="relative p-2.5 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">
+          <button className="relative p-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-colors">
             <Bell className="w-4.5 h-4.5" />
-            <span className="absolute top-2 right-2 w-2 h-2 bg-emerald-500 rounded-full" />
+            <span className="absolute top-2 right-2 w-2 h-2 bg-indigo-500 rounded-full" />
           </button>
           
-          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
+          <div className="h-6 w-px bg-white/10 hidden sm:block" />
           
-          <div className="flex items-center gap-3 cursor-pointer" onClick={handleSignOut}>
+          <div 
+            className="flex items-center gap-3 cursor-pointer hover:bg-white/5 p-2 rounded-xl transition-colors"
+            onClick={handleSignOut}
+          >
             <div className="hidden sm:block text-right">
-              <p className="text-sm font-semibold text-slate-900">{userName}</p>
+              <p className="text-sm font-semibold text-white">{userName}</p>
               <p className="text-xs text-slate-500">{userEmail}</p>
             </div>
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white">
               <User className="w-4 h-4" />
             </div>
-            <button className="p-2 text-slate-400 hover:text-slate-600" title="Sign out">
+            <button className="p-2 text-slate-400 hover:text-white" title="Sign out">
               <LogOut className="w-4 h-4" />
             </button>
           </div>
@@ -77,18 +80,18 @@ export function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/40 z-[99] md:hidden"
+              className="fixed inset-0 bg-black/60 z-[99] md:hidden backdrop-blur-sm"
             />
             <motion.div
               initial={{ x: -280 }}
               animate={{ x: 0 }}
               exit={{ x: -280 }}
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
-              className="fixed inset-y-0 left-0 w-72 bg-white z-[100] md:hidden shadow-2xl"
+              className="fixed inset-y-0 left-0 w-72 bg-[#121218] z-[100] md:hidden shadow-2xl border-r border-white/5"
             >
-              <div className="h-16 flex items-center justify-between px-6 border-b border-slate-200">
+              <div className="h-16 flex items-center justify-between px-6 border-b border-white/5">
                 <Logo variant="full" size="sm" />
-                <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-slate-500">
+                <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-slate-400">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -102,7 +105,9 @@ export function Header() {
                       href={link.href} 
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`flex items-center gap-3 p-3 rounded-xl text-sm font-medium transition-all ${
-                        active ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "text-slate-600 hover:bg-slate-50"
+                        active 
+                          ? "bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-white border border-indigo-500/20" 
+                          : "text-slate-400 hover:text-white hover:bg-white/5"
                       }`}
                     >
                       <link.icon className="w-4 h-4" />
@@ -112,20 +117,20 @@ export function Header() {
                 })}
               </nav>
 
-              <div className="p-6 border-t border-slate-200">
+              <div className="p-6 border-t border-white/5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white">
                       <User className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-slate-900">{userName}</p>
+                      <p className="text-sm font-semibold text-white">{userName}</p>
                       <p className="text-xs text-slate-500">{userEmail}</p>
                     </div>
                   </div>
                   <button 
                     onClick={handleSignOut}
-                    className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg"
+                    className="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg"
                     title="Sign out"
                   >
                     <LogOut className="w-4 h-4" />

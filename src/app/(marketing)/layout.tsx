@@ -15,37 +15,38 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAFBFC]">
+    <div className="flex flex-col min-h-screen bg-[#0A0A0F]">
       <motion.nav
         initial={false}
         animate={{
-          backgroundColor: scrolled ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0)",
+          backgroundColor: scrolled ? "rgba(10,10,15,0.95)" : "rgba(10,10,15,0)",
           backdropFilter: scrolled ? "blur(20px)" : "blur(0px)",
-          boxShadow: scrolled ? "0 1px 3px rgba(0,0,0,0.05)" : "0 0px 0px transparent",
+          boxShadow: scrolled ? "0 1px 3px rgba(0,0,0,0.3)" : "0 0px 0px transparent",
+          borderColor: scrolled ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0)",
         }}
         transition={{ duration: 0.3 }}
-        className="sticky top-0 z-50 w-full border-b border-slate-200/50"
+        className="sticky top-0 z-50 w-full border-b"
       >
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <Logo variant="full" size="md" />
 
             <div className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors">Features</a>
-              <a href="#how-it-works" className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors">How it Works</a>
-              <a href="#testimonials" className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors">Testimonials</a>
-              <a href="#pricing" className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors">Pricing</a>
+              <a href="#features" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Features</a>
+              <a href="#how-it-works" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">How it Works</a>
+              <a href="#testimonials" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Testimonials</a>
+              <a href="#pricing" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Pricing</a>
             </div>
 
             <div className="flex items-center gap-4">
-              <Link href="/dashboard" className="hidden sm:block text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">
+              <Link href="/dashboard" className="hidden sm:block text-sm font-medium text-slate-300 hover:text-white transition-colors">
                 Sign In
               </Link>
               <Link href="/dashboard">
                 <motion.div
-                  whileHover={{ scale: 1.04, boxShadow: "0 10px 20px -5px rgba(5,150,105,0.25)" }}
+                  whileHover={{ scale: 1.04, boxShadow: "0 10px 20px -5px rgba(99,102,241,0.3)" }}
                   whileTap={{ scale: 0.97 }}
-                  className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg shadow-emerald-500/20 transition-all cursor-pointer"
+                  className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg transition-all cursor-pointer"
                 >
                   Get Started Free
                 </motion.div>
@@ -57,7 +58,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
 
       <main className="flex-1">{children}</main>
 
-      <footer className="bg-slate-900 text-white py-16">
+      <footer className="border-t border-white/5 py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div className="md:col-span-2">
@@ -85,7 +86,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-slate-500 text-sm">© {new Date().getFullYear()} ClauseGuard. All rights reserved.</p>
             <p className="text-slate-500 text-sm">Built with Next.js & AI</p>
           </div>

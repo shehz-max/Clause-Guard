@@ -15,13 +15,13 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="w-64 h-screen bg-white border-r border-slate-200 flex flex-col shrink-0 hidden md:flex">
-      <div className="p-6 border-b border-slate-100">
+    <div className="w-64 h-screen bg-[#121218] border-r border-white/5 flex flex-col shrink-0 hidden md:flex">
+      <div className="p-6 border-b border-white/5">
         <Logo variant="full" size="md" />
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
-        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-4 px-3">Menu</p>
+        <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-4 px-3">Menu</p>
         {links.map((link) => {
           const active = pathname === link.href || pathname.startsWith(link.href + '/');
           return (
@@ -29,12 +29,12 @@ export function Sidebar() {
               {active && (
                 <motion.div
                   layoutId="sidebar-active"
-                  className="absolute inset-0 bg-emerald-50 rounded-xl border border-emerald-200"
+                  className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-xl border border-indigo-500/20"
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
-              <div className={`relative flex items-center px-3 py-3 rounded-xl text-sm transition-colors ${active ? "text-emerald-700 font-semibold" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"}`}>
-                <link.icon className={`w-4 h-4 mr-3 ${active ? "text-emerald-600" : "text-slate-400"}`} />
+              <div className={`relative flex items-center px-3 py-3 rounded-xl text-sm transition-colors ${active ? "text-white font-semibold" : "text-slate-400 hover:text-white hover:bg-white/5"}`}>
+                <link.icon className={`w-4 h-4 mr-3 ${active ? "text-indigo-400" : "text-slate-500"}`} />
                 {link.name}
               </div>
             </Link>
@@ -42,16 +42,16 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="p-4 border-t border-slate-100">
+      <div className="p-4 border-t border-white/5">
         <Link 
           href="/settings"
           className={`flex items-center px-3 py-3 text-sm rounded-xl transition-all ${
             pathname === "/settings" 
-              ? "bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200" 
-              : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              ? "bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-white font-semibold border border-indigo-500/20" 
+              : "text-slate-400 hover:text-white hover:bg-white/5"
           }`}
         >
-          <Settings className={`w-4 h-4 mr-3 ${pathname === "/settings" ? "text-emerald-600" : "text-slate-400"}`} />
+          <Settings className={`w-4 h-4 mr-3 ${pathname === "/settings" ? "text-indigo-400" : "text-slate-500"}`} />
           Settings
         </Link>
       </div>

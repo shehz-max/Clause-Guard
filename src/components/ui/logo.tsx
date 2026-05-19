@@ -3,14 +3,15 @@ import React from 'react';
 
 interface LogoProps {
   variant?: 'full' | 'icon';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   className?: string;
 }
 
 const sizes = {
-  sm: { icon: 32, text: 'text-base', iconSize: 'w-8 h-8' },
-  md: { icon: 40, text: 'text-xl', iconSize: 'w-10 h-10' },
+  sm: { icon: 28, text: 'text-sm', iconSize: 'w-7 h-7' },
+  md: { icon: 36, text: 'text-lg', iconSize: 'w-9 h-9' },
   lg: { icon: 48, text: 'text-2xl', iconSize: 'w-12 h-12' },
+  xl: { icon: 60, text: 'text-3xl', iconSize: 'w-14 h-14' },
 };
 
 export function Logo({ variant = 'full', size = 'md', className = '' }: LogoProps) {
@@ -22,41 +23,96 @@ export function Logo({ variant = 'full', size = 'md', className = '' }: LogoProp
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={s.iconSize}
+        className={`${s.iconSize} drop-shadow-lg`}
       >
-        {/* Document Stack Base */}
-        <rect x="20" y="12" width="45" height="58" rx="4" fill="#1E3A5F" opacity="0.3" transform="rotate(-8 20 12)" />
-        <rect x="22" y="10" width="45" height="58" rx="4" fill="#2C5282" opacity="0.5" transform="rotate(-4 22 10)" />
+        <defs>
+          <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#6366F1" />
+            <stop offset="50%" stopColor="#8B5CF6" />
+            <stop offset="100%" stopColor="#A855F7" />
+          </linearGradient>
+          <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#F472B6" />
+            <stop offset="100%" stopColor="#818CF8" />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
         
-        {/* Main Document */}
-        <rect x="25" y="8" width="50" height="64" rx="5" fill="#1E3A5F" className="drop-shadow-lg" />
+        {/* Outer glow effect */}
+        <ellipse cx="50" cy="50" rx="35" ry="40" fill="url(#glowGradient)" opacity="0.15" filter="url(#glow)" />
         
-        {/* Document Lines (representing text/clauses) */}
-        <rect x="33" y="22" width="22" height="3" rx="1.5" fill="#60A5FA" opacity="0.8" />
-        <rect x="33" y="30" width="28" height="2.5" rx="1.25" fill="#93C5FD" opacity="0.7" />
-        <rect x="33" y="36" width="24" height="2.5" rx="1.25" fill="#93C5FD" opacity="0.7" />
-        <rect x="33" y="42" width="18" height="2.5" rx="1.25" fill="#93C5FD" opacity="0.6" />
-        <rect x="33" y="48" width="26" height="2.5" rx="1.25" fill="#93C5FD" opacity="0.5" />
-        
-        {/* Checkmark Badge (representing verified/protected) */}
-        <circle cx="70" cy="65" r="16" fill="#059669" className="drop-shadow-md" />
-        <path 
-          d="M62 65L67 70L78 59" 
-          stroke="white" 
-          strokeWidth="3.5" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
+        {/* Shield base */}
+        <path
+          d="M50 10 L80 25 L80 55 Q80 75 50 90 Q20 75 20 55 L20 25 Z"
+          fill="url(#shieldGradient)"
+          className="drop-shadow-lg"
         />
         
-        {/* Small accent dots for visual interest */}
-        <circle cx="28" cy="18" r="2" fill="#60A5FA" opacity="0.5" />
-        <circle cx="32" cy="18" r="1.5" fill="#60A5FA" opacity="0.3" />
+        {/* Shield inner highlight */}
+        <path
+          d="M50 15 L75 28 L75 53 Q75 70 50 83 Q25 70 25 53 L25 28 Z"
+          fill="none"
+          stroke="rgba(255,255,255,0.2)"
+          strokeWidth="1"
+        />
+        
+        {/* Neural network pattern */}
+        <g opacity="0.9">
+          {/* Central node */}
+          <circle cx="50" cy="50" r="6" fill="white" />
+          
+          {/* Top node */}
+          <circle cx="50" cy="28" r="4" fill="rgba(255,255,255,0.8)" />
+          
+          {/* Bottom node */}
+          <circle cx="50" cy="72" r="4" fill="rgba(255,255,255,0.8)" />
+          
+          {/* Left node */}
+          <circle cx="32" cy="50" r="4" fill="rgba(255,255,255,0.8)" />
+          
+          {/* Right node */}
+          <circle cx="68" cy="50" r="4" fill="rgba(255,255,255,0.8)" />
+          
+          {/* Connection lines */}
+          <line x1="50" y1="32" x2="50" y2="44" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+          <line x1="50" y1="56" x2="50" y2="68" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+          <line x1="36" y1="50" x2="44" y2="50" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+          <line x1="56" y1="50" x2="64" y2="50" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+          
+          {/* Diagonal connections */}
+          <line x1="35" y1="35" x2="45" y2="45" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="55" y1="55" x2="65" y2="65" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="65" y1="35" x2="55" y2="45" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="45" y1="55" x2="35" y2="65" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" />
+          
+          {/* Small accent nodes */}
+          <circle cx="35" cy="35" r="2" fill="rgba(255,255,255,0.5)" />
+          <circle cx="65" cy="35" r="2" fill="rgba(255,255,255,0.5)" />
+          <circle cx="35" cy="65" r="2" fill="rgba(255,255,255,0.5)" />
+          <circle cx="65" cy="65" r="2" fill="rgba(255,255,255,0.5)" />
+        </g>
+        
+        {/* Sparkle accents */}
+        <circle cx="20" cy="20" r="1.5" fill="#F472B6" opacity="0.8" />
+        <circle cx="82" cy="25" r="1" fill="#818CF8" opacity="0.6" />
+        <circle cx="18" cy="60" r="1" fill="#A855F7" opacity="0.5" />
       </svg>
       
       {variant === 'full' && (
-        <span className={`font-bold tracking-tight text-slate-800 ${s.text}`}>
-          Clause<span className="text-emerald-600">Guard</span>
-        </span>
+        <div className="flex items-center">
+          <span className={`font-bold tracking-tight text-white ${s.text}`}>
+            Clause
+          </span>
+          <span className={`font-bold tracking-tight text-gradient-animated ${s.text}`}>
+            Guard
+          </span>
+        </div>
       )}
     </div>
   );
