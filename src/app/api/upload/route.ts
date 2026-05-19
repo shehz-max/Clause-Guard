@@ -6,11 +6,22 @@ import { createEmbeddings } from '@/lib/rag/embeddings'
 import { v4 as uuidv4 } from 'uuid'
 import { runAnalysisPipeline } from '@/lib/analysis/pipeline'
 import { waitUntil } from '@vercel/functions'
+import { checkRateLimit, getClientIP, getSecurityHeaders, RateLimitExceededError } from '@/lib/rate-limit'
 
 export const maxDuration = 60
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    const ip = getClientIP(request)
+    const { allowed, resetIn } = checkRateLimit(`${ip}:upload`, { windowMs: 60000, maxRequests: 10 })
+    if (!allowed) {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded. Try again later.', retryAfter: Math.ceil(resetIn / 1000) },
+        { status: 429 }
+      )
+    }
+
     const formData = await request.formData()
     const file = formData.get('file') as File
 

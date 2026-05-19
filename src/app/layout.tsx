@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/components/providers/auth-provider";
 
 const fontSans = Inter({
   variable: "--font-sans",
@@ -138,7 +139,9 @@ export default function RootLayout({
         className="min-h-full bg-background text-foreground antialiased"
         suppressHydrationWarning
       >
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

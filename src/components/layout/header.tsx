@@ -1,14 +1,29 @@
 "use client";
 import { useState } from "react";
-import { Search, User, Menu, X, LayoutDashboard, Upload, Settings, Bell, Shield } from "lucide-react";
+import { Search, User, Menu, X, LayoutDashboard, Upload, Settings, Bell, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/ui/logo";
+import { useAuth } from "@/components/providers/auth-provider";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { user, signOut } = useAuth();
+
+  const links = [
+    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+    { name: "Upload", href: "/upload", icon: Upload },
+    { name: "Settings", href: "/settings", icon: Settings },
+  ];
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
+  const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User';
+  const userEmail = user?.email || '';
 
   const links = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -45,14 +60,17 @@ export function Header() {
           
           <div className="h-6 w-px bg-slate-200 hidden sm:block" />
           
-          <div className="flex items-center gap-3 cursor-pointer">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={handleSignOut}>
             <div className="hidden sm:block text-right">
-              <p className="text-sm font-semibold text-slate-900">Umer Muhammad</p>
-              <p className="text-xs text-slate-500">Legal Admin</p>
+              <p className="text-sm font-semibold text-slate-900">{userName}</p>
+              <p className="text-xs text-slate-500">{userEmail}</p>
             </div>
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white">
               <User className="w-4 h-4" />
             </div>
+            <button className="p-2 text-slate-400 hover:text-slate-600" title="Sign out">
+              <LogOut className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </header>
@@ -101,14 +119,23 @@ export function Header() {
               </nav>
 
               <div className="p-6 border-t border-slate-200">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white">
-                    <User className="w-5 h-5" />
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white">
+                      <User className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-slate-900">{userName}</p>
+                      <p className="text-xs text-slate-500">{userEmail}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-slate-900">Umer Muhammad</p>
-                    <p className="text-xs text-slate-500">Legal Admin</p>
-                  </div>
+                  <button 
+                    onClick={handleSignOut}
+                    className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg"
+                    title="Sign out"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
             </motion.div>

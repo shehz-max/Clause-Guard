@@ -2,12 +2,23 @@ import { streamText } from 'ai';
 import { models } from '../../../lib/groq';
 import { processRagQuery } from '../../../lib/rag/retriever';
 import { NextResponse } from 'next/server';
+import { checkRateLimit, getClientIP } from '@/lib/rate-limit';
 
 // Allow streaming responses up to 60 seconds (quality model needs more time)
 export const maxDuration = 60;
 
 export async function POST(req: Request) {
   try {
+    // Rate limiting
+    const ip = getClientIP(req)
+    const { allowed, resetIn } = checkRateLimit(`${ip}:chat`, { windowMs: 60000, maxRequests: 30 })
+    if (!allowed) {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded. Try again later.', retryAfter: Math.ceil(resetIn / 1000) },
+        { status: 429 }
+      )
+    }
+
     const body = await req.json();
     const { messages, documentId } = body;
     

@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FileText, ShieldAlert, Clock, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { FileText, ShieldAlert, Clock, ArrowRight, Trash2, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
 export interface Contract {
@@ -12,7 +13,16 @@ export interface Contract {
   analyses?: { overall_risk_score: number; risk_level: string }[];
 }
 
-export function ContractCard({ contract }: { contract: Contract }) {
+interface ContractCardProps {
+  contract: Contract;
+  onDelete?: (id: string) => void;
+}
+
+export function ContractCard({ contract, onDelete }: ContractCardProps) {
+  const [showMenu, setShowMenu] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  
   const isAnalyzed = contract.status === 'analyzed';
   const analysis = isAnalyzed && contract.analyses && contract.analyses.length > 0 ? contract.analyses[0] : null;
   
@@ -24,6 +34,37 @@ export function ContractCard({ contract }: { contract: Contract }) {
     month: 'short', day: 'numeric', year: 'numeric'
   });
 
+  const handleDelete = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (!confirm('Are you sure you want to delete this contract? This action cannot be undone.')) {
+      return;
+    }
+    
+    setIsDeleting(true);
+    
+    try {
+      const response = await fetch(`/api/contracts/${contract.id}`, {
+        method: 'DELETE',
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Failed to delete contract');
+      }
+      
+      onDelete?.(contract.id);
+    } catch (error: any) {
+      alert(error.message || 'Failed to delete contract');
+    } finally {
+      setIsDeleting(false);
+      setShowConfirm(false);
+      setShowMenu(false);
+    }
+  };
+
   return (
     <motion.div 
       layout
@@ -31,7 +72,7 @@ export function ContractCard({ contract }: { contract: Contract }) {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -4, boxShadow: "0 12px 24px -8px rgba(0,0,0,0.15)" }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className="group bg-white rounded-2xl border border-slate-200 hover:border-emerald-500/30 overflow-hidden"
+      className="group bg-white rounded-2xl border border-slate-200 hover:border-emerald-500/30 overflow-hidden relative"
     >
       <Link href={contract.status === 'analyzed' ? `/contract/${contract.id}` : '#'} className="block p-6">
         <div className="flex justify-between items-start mb-5">
@@ -39,25 +80,39 @@ export function ContractCard({ contract }: { contract: Contract }) {
             <FileText className="w-5 h-5" />
           </div>
           
-          {isAnalyzed && analysis ? (
-            <div className={`px-3 py-1.5 text-xs font-bold rounded-lg flex items-center gap-1.5 ${
-              isHighRisk ? 'bg-red-50 text-red-600 border border-red-100' : 
-              isMedRisk ? 'bg-amber-50 text-amber-600 border border-amber-100' : 'bg-emerald-50 text-emerald-600 border border-emerald-100'
-            }`}>
-              <div className={`w-2 h-2 rounded-full ${isHighRisk ? 'bg-red-500 animate-pulse' : isMedRisk ? 'bg-amber-500' : 'bg-emerald-500'}`} />
-              {score.toFixed(0)}
-            </div>
-          ) : contract.status === 'failed' ? (
-            <div className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-red-50 text-red-600 border border-red-100 flex items-center gap-1.5">
-              <ShieldAlert className="w-3.5 h-3.5" />
-              Failed
-            </div>
-          ) : (
-            <div className="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-100 text-slate-600 flex items-center gap-1.5">
-              <Clock className="w-3 h-3 animate-spin" style={{ animationDuration: '2s' }} />
-              {contract.status}
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            {isAnalyzed && analysis ? (
+              <div className={`px-3 py-1.5 text-xs font-bold rounded-lg flex items-center gap-1.5 ${
+                isHighRisk ? 'bg-red-50 text-red-600 border border-red-100' : 
+                isMedRisk ? 'bg-amber-50 text-amber-600 border border-amber-100' : 'bg-emerald-50 text-emerald-600 border border-emerald-100'
+              }`}>
+                <div className={`w-2 h-2 rounded-full ${isHighRisk ? 'bg-red-500 animate-pulse' : isMedRisk ? 'bg-amber-500' : 'bg-emerald-500'}`} />
+                {score.toFixed(0)}
+              </div>
+            ) : contract.status === 'failed' ? (
+              <div className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-red-50 text-red-600 border border-red-100 flex items-center gap-1.5">
+                <ShieldAlert className="w-3.5 h-3.5" />
+                Failed
+              </div>
+            ) : (
+              <div className="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-100 text-slate-600 flex items-center gap-1.5">
+                <Clock className="w-3 h-3 animate-spin" style={{ animationDuration: '2s' }} />
+                {contract.status}
+              </div>
+            )}
+            
+            {/* Menu button */}
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setShowMenu(!showMenu);
+              }}
+              className="p-1.5 rounded-lg hover:bg-slate-100 transition-colors opacity-0 group-hover:opacity-100"
+            >
+              <MoreHorizontal className="w-4 h-4 text-slate-400" />
+            </button>
+          </div>
         </div>
 
         <h3 className="font-semibold text-slate-900 text-base mb-3 line-clamp-2 leading-tight" title={contract.filename}>
@@ -74,6 +129,87 @@ export function ContractCard({ contract }: { contract: Contract }) {
           <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all" />
         </div>
       </Link>
+
+      {/* Dropdown menu */}
+      {showMenu && (
+        <>
+          <div 
+            className="fixed inset-0 z-10" 
+            onClick={(e) => {
+              e.preventDefault();
+              setShowMenu(false);
+            }}
+          />
+          <div className="absolute right-4 top-16 z-20 bg-white rounded-xl shadow-xl border border-slate-200 py-1 min-w-[140px]">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setShowConfirm(true);
+                setShowMenu(false);
+              }}
+              className="w-full px-4 py-2.5 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+            >
+              <Trash2 className="w-4 h-4" />
+              Delete
+            </button>
+          </div>
+        </>
+      )}
+
+      {/* Delete confirmation */}
+      {showConfirm && (
+        <>
+          <div 
+            className="fixed inset-0 z-30 bg-black/40 flex items-center justify-center p-4"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowConfirm(false);
+            }}
+          >
+            <div 
+              className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
+                <Trash2 className="w-6 h-6 text-red-600" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 text-center mb-2">Delete Contract?</h3>
+              <p className="text-sm text-slate-500 text-center mb-6">
+                This will permanently delete "{contract.filename}" and all associated analysis data. This action cannot be undone.
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowConfirm(false);
+                  }}
+                  className="flex-1 px-4 py-2.5 bg-slate-100 text-slate-700 font-medium rounded-xl hover:bg-slate-200 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDelete}
+                  disabled={isDeleting}
+                  className="flex-1 px-4 py-2.5 bg-red-600 text-white font-medium rounded-xl hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  {isDeleting ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Deleting...
+                    </>
+                  ) : (
+                    <>
+                      <Trash2 className="w-4 h-4" />
+                      Delete
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </motion.div>
   );
 }
