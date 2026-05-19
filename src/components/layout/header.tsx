@@ -25,12 +25,6 @@ export function Header() {
   const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User';
   const userEmail = user?.email || '';
 
-  const links = [
-    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Upload", href: "/upload", icon: Upload },
-    { name: "Settings", href: "/settings", icon: Settings },
-  ];
-
   return (
     <>
       <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 md:px-6 z-30">
